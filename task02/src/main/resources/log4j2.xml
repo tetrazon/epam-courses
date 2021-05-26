@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="error-pattern">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{5} - %msg%n
+        </Property>
+        <Property name="console-pattern">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{1} - %msg%n
+        </Property>
+        <Property name="filename">logs/log.log</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="File" fileName="${filename}" append="true"
+                     filePattern = "logs/${date:yyyy-MM-dd}/%d{yyyy-MM-dd_HH-mm}_%i.log">
+            <PatternLayout pattern="${error-pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="50 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${console-pattern}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="error">
+            <AppenderRef ref="Console" level = "error"/>
+        </Root>
+        <Logger name="by.training.task02branchingstatements.firesensor.model.FireSensor" level="info" additivity="true">
+            <AppenderRef ref="File" level="error"/>
+            <AppenderRef ref="Console" level = "info"/>
+        </Logger>
+        <Logger name="by.training.task02branchingstatements.figure.model.Triangle" level="info" additivity="true">
+            <AppenderRef ref="File" level="error"/>
+            <AppenderRef ref="Console" level = "info"/>
+        </Logger>
+        <Logger name="by.training.task02branchingstatements.figure.service.TriangleService" level="info" additivity="true">
+            <AppenderRef ref="Console" level = "info"/>
+        </Logger>
+        <Logger name="by.training.task02branchingstatements.operations.IntegerOperations" level="info" additivity="false">
+            <AppenderRef ref="File" level="error"/>
+            <AppenderRef ref="Console" level = "info"/>
+        </Logger>
+        <Logger name="by.training.task02branchingstatements.secret.model.DataBase" level="error" additivity="true">
+            <AppenderRef ref="File" level="error"/>
+        </Logger>
+        <Logger name="by.training.task02branchingstatements.secret.model.AccessLevel" level="error" additivity="true">
+            <AppenderRef ref="File" level="error"/>
+        </Logger>
+        <Logger name="by.training.task02branchingstatements.secret.validator.PasswordValidator" level="info" additivity="true">
+            <AppenderRef ref="Console" level = "info"/>
+        </Logger>
+    </Loggers>
+</Configuration>
