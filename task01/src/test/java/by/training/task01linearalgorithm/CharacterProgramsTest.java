@@ -36,18 +36,18 @@ public class CharacterProgramsTest {
         };
     }
 
-    @Test(description = "Positive scenario of the getCharSerialNumber", dataProvider = "dataForGetCharSerialNumber")
+    @Test(description = "Positive scenario of the calcCharSerialNumber", dataProvider = "dataForGetCharSerialNumber")
     public void testGetCharSerialNumber(char ch, int result) {
-        assertTrue(result == getCharSerialNumber(ch));
+        assertTrue(result == calcCharSerialNumber(ch));
     }
 
-    @Test(description = "Positive scenario of the getPreviousCharacter", dataProvider = "dataForGetPreviousCharacter")
+    @Test(description = "Positive scenario of the calcPreviousCharacter", dataProvider = "dataForGetPreviousCharacter")
     public void testGetPreviousCharacter(char ch, char result) {
-        assertTrue(result == getPreviousCharacter(ch));
+        assertTrue(result == calcPreviousCharacter(ch));
     }
 
-    @Test(description = "Positive scenario of the getNextCharacter", dataProvider = "dataForGetNextCharacter")
+    @Test(description = "Positive scenario of the calcNextCharacter", dataProvider = "dataForGetNextCharacter")
     public void testGetNextCharacter(char ch, char result) {
-        assertTrue(result == getNextCharacter(ch));
+        assertTrue(result == calcNextCharacter(ch));
     }
 }

@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
  * that operate on char and returns chars
  * or indexes of particular char in the int representation
  */
-public class CharacterPrograms {
+public final class CharacterPrograms {
     private static Logger logger = LogManager.getLogger(CharacterPrograms.class);
 
     // Suppresses default constructor, ensuring non-instanceability.
@@ -18,24 +18,24 @@ public class CharacterPrograms {
     /**
      * returns the serial number representation of a character
      */
-    public static int getCharSerialNumber(char ch){
-        logger.info(String.format("getCharSerialNumber() is called, ch = %s", ch));
+    public static int calcCharSerialNumber(char ch){
+        logger.info(String.format("calcCharSerialNumber() is called, ch = %s", ch));
         return ch;
     }
 
     /**
      *returns the previous character relatively ch
      */
-    public static char getPreviousCharacter(char ch){
-        logger.info(String.format("getPreviousCharacter() is called, ch = %s", ch));
+    public static char calcPreviousCharacter(char ch){
+        logger.info(String.format("calcPreviousCharacter() is called, ch = %s", ch));
         return (char) (ch - 1);
     }
 
     /**
      *returns the next character following by ch
      */
-    public static char getNextCharacter(char ch){
-        logger.info(String.format("getNextCharacter() is called, ch = %s", ch));
+    public static char calcNextCharacter(char ch){
+        logger.info(String.format("calcNextCharacter() is called, ch = %s", ch));
         return (char) (ch + 1);
     }
 
