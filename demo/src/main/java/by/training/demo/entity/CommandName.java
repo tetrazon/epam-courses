@@ -1,0 +1,12 @@
+package by.training.demo.entity;
+
+public enum CommandName {
+    CREATE_DOUBLE_ARRAY,
+    CREATE_DOUBLE_ARRAY_FROM_FILE,
+    CREATE_INTEGER_ARRAY,
+    CREATE_INTEGER_ARRAY_FROM_FILE,
+    DELETE_ARRAY,
+    READ_ARRAY,
+    SORT_ARRAY,
+    WRONG_REQUEST
+}
