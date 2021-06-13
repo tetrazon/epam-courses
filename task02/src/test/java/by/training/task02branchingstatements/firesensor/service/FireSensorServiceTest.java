@@ -12,6 +12,6 @@ public class FireSensorServiceTest {
     public void testEmulateFireSensorTrigger() {
         FireSensor fireSensor = new FireSensor(0);
         FireSensorService fireSensorService = new FireSensorService();
-        fireSensorService.emulateFireSensorTrigger(fireSensor);
+        fireSensorService.emulateFireSensorTrigger(fireSensor, 10);
     }
 }

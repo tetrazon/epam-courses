@@ -19,12 +19,13 @@ public class FireSensor {
     }
 
     /**
-     * increases the currentTemperature by 10 degree
+     * increases the currentTemperature by "by" degree
+     * @param by
      */
-    public void heatUpByTenDegree(){
+    public void heatUp(int by){
         logger.info(String.format("increase the temperature %d by 10 degree", currentTemperature));
-        currentTemperature += 10;
-        if (currentTemperature > 60){
+        currentTemperature += by;
+        if (currentTemperature > UPPER_THRESHOLD){
             logger.error("temperature in the room exceeded 60 Celsius degree");
             throw new FireSensorException("temperature in the room exceeded 60 Celsius degree");
         }

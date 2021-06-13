@@ -18,15 +18,12 @@ public class AccessLevelService {
      * @return Optional<String> of access level for particular password
      */
     public Optional<String> getAccessLevelByPassword(List<AccessLevel> accessLevelList, String password){
-        if (PasswordValidator.isCorrectPassword(password)){
-            return accessLevelList
+            return PasswordValidator.isCorrectPassword(password) ? accessLevelList
                     .stream()
                     .filter(accessLevel -> accessLevel.getPasswords().contains(password))
                     .map(AccessLevel::getAccessLevelName)
-                    .findFirst();
-        } else {
-            return Optional.empty();
-        }
+                    .findFirst()
+                    : Optional.empty();
     }
 
 

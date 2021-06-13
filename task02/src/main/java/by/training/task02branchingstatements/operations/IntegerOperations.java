@@ -14,7 +14,10 @@ public final class IntegerOperations {
     private IntegerOperations(){}
 
     /**
-     *returns 7 if a < b otherwise 8
+     * Compares two ints
+     * @param a first
+     * @param b second
+     * @return 7 if a < b otherwise 8
      */
     public static int compareTwoInts(int a, int b){
         logger.info("compareTwoInts() is called");

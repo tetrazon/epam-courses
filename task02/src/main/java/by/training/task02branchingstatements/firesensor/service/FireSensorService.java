@@ -11,9 +11,9 @@ public class FireSensorService {
      * simulates the alarm triggering alarm reaching temperature above 60 degree
      * by increasing the temperature by 10 degree
      */
-    public void emulateFireSensorTrigger(FireSensor fireSensor){
+    public void emulateFireSensorTrigger(FireSensor fireSensor, int by){
         while (true){
-            fireSensor.heatUpByTenDegree();
+            fireSensor.heatUp(by);
         }
     }
 }
