@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>by.training.task04.controller.TextController</OriginalElement>
+  <nodes>
+    <node x="307.0" y="279.0">by.training.task04.service.impl.TextServiceImpl</node>
+    <node x="214.0" y="1293.0">by.training.task04.exception.TextDaoException</node>
+    <node x="622.0" y="0.0">by.training.task04.entity.Text</node>
+    <node x="945.0" y="169.0">by.training.task04.repository.impl.RepositoryImpl</node>
+    <node x="1103.0" y="1043.0">by.training.task04.exception.RepositoryException</node>
+    <node x="882.0" y="1043.0">by.training.task04.exception.TextServiceException</node>
+    <node x="472.0" y="1043.0">by.training.task04.entity.MessageManager</node>
+    <node x="689.0" y="1043.0">by.training.task04.Runner</node>
+    <node x="0.0" y="301.0">by.training.task04.dao.impl.TextDaoImpl</node>
+    <node x="976.5" y="0.0">by.training.task04.repository.Repository</node>
+    <node x="0.0" y="0.0">by.training.task04.dao.TextDao</node>
+    <node x="580.0" y="683.0">by.training.task04.util.TextGenerator</node>
+    <node x="294.0" y="683.0">by.training.task04.entity.Sentence</node>
+    <node x="307.0" y="0.0">by.training.task04.service.TextService</node>
+    <node x="831.0" y="683.0">by.training.task04.util.Parser</node>
+    <node x="0.0" y="1043.0">by.training.task04.entity.Word</node>
+    <node x="409.0" y="1293.0">by.training.task04.exception.ParseException</node>
+    <node x="0.0" y="683.0">by.training.task04.controller.TextController</node>
+    <node x="228.0" y="1043.0">by.training.task04.view.TextView</node>
+    <node x="0.0" y="1293.0">by.training.task04.exception.TextParserException</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="by.training.task04.repository.impl.RepositoryImpl" target="by.training.task04.repository.Repository">
+      <point x="0.0" y="-102.5" />
+      <point x="0.0" y="59.5" />
+    </edge>
+    <edge source="by.training.task04.dao.impl.TextDaoImpl" target="by.training.task04.dao.TextDao">
+      <point x="0.0" y="-168.5" />
+      <point x="0.0" y="125.5" />
+    </edge>
+    <edge source="by.training.task04.service.impl.TextServiceImpl" target="by.training.task04.service.TextService">
+      <point x="0.0" y="-146.5" />
+      <point x="0.0" y="114.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7000000000000001" x="630.9761904761901" y="791.2857142857142" />
+  <SelectedNodes>
+    <node>by.training.task04.service.impl.TextServiceImpl</node>
+    <node>by.training.task04.exception.TextDaoException</node>
+    <node>by.training.task04.entity.Text</node>
+    <node>by.training.task04.repository.impl.RepositoryImpl</node>
+    <node>by.training.task04.exception.RepositoryException</node>
+    <node>by.training.task04.exception.TextServiceException</node>
+    <node>by.training.task04.entity.MessageManager</node>
+    <node>by.training.task04.Runner</node>
+    <node>by.training.task04.dao.impl.TextDaoImpl</node>
+    <node>by.training.task04.repository.Repository</node>
+    <node>by.training.task04.dao.TextDao</node>
+    <node>by.training.task04.util.TextGenerator</node>
+    <node>by.training.task04.entity.Sentence</node>
+    <node>by.training.task04.service.TextService</node>
+    <node>by.training.task04.util.Parser</node>
+    <node>by.training.task04.entity.Word</node>
+    <node>by.training.task04.exception.ParseException</node>
+    <node>by.training.task04.controller.TextController</node>
+    <node>by.training.task04.view.TextView</node>
+    <node>by.training.task04.exception.TextParserException</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
