@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * in memory String repository implementation
+ */
 public class RepositoryImpl implements Repository<String> {
 
     private static final Logger logger = LogManager.getLogger(RepositoryImpl.class);

@@ -11,6 +11,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
+/**
+ * service class to work controller with DAO
+ */
 public class TextServiceImpl implements TextService {
 
     private static final Logger logger = LogManager.getLogger(TextServiceImpl.class);

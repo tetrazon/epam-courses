@@ -3,6 +3,8 @@ package by.training.task04.util;
 import by.training.task04.entity.Sentence;
 import by.training.task04.entity.Text;
 import by.training.task04.entity.Word;
+import by.training.task04.exception.ParseException;
+import by.training.task04.exception.TextParserException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -30,6 +32,15 @@ public class ParserTest {
         };
     }
 
+    @DataProvider(name = "dataForParseTextFromWrongFile")
+    public Object[][] createDataForParseTextFromWrongFile() {
+        return new Object[][]{
+                {""},
+                {null},
+                {"not_existing_file.txt"}
+        };
+    }
+
     @Test(description = "positive scenario of parsing the text",
     dataProvider = "dataForParseTextFromFile")
     public void testParseTextFromFile(String fileName, Text expected) {
@@ -38,11 +49,11 @@ public class ParserTest {
 
     }
 
-    @Test
-    public void testParseTextFromString() {
+    @Test(description = "negative scenario of parsing the text",
+    dataProvider = "dataForParseTextFromWrongFile",
+    expectedExceptions = TextParserException.class)
+    public void testParseTextFromWrongFile(String fileName) {
+        Text actual = Parser.parseTextFromFile(fileName);
     }
 
-    @Test
-    public void testParseStringToWordList() {
-    }
 }

@@ -12,9 +12,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+/**
+ * class for parsing file/strings to Text entity
+ */
 public final class Parser {
 
     private static final Logger logger = LogManager.getLogger(Parser.class);
@@ -49,11 +51,11 @@ public final class Parser {
 
     private static Text parseTextFromStringArray(String[] stringSentences) {
         Text text = new Text();
-        text.setHead(stringSentences[0]);
+        text.setHead(stringSentences[0].trim());
         List<Sentence> sentenceList = new ArrayList<>();
         String[] stringWords;
         for (int i = 1; i < stringSentences.length; i++) {
-            List<Word> wordList = parseStringToWordList(stringSentences[i]);
+            List<Word> wordList = parseStringToWordList(stringSentences[i].trim());
             sentenceList.add(new Sentence(wordList));
         }
 

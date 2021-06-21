@@ -6,11 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 public class Text {
     private String head;
     private List<Sentence> sentenceList;
@@ -71,6 +71,41 @@ public class Text {
             sb.append(sentence);
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Text text = (Text) o;
+        if(!head.equals(text.head)){
+            return false;
+        }
+
+        if (sentenceList.size() != text.sentenceList.size()){
+            return false;
+        }
+        List<Word> wordList1;
+        List<Word> wordList2;
+        for (int i = 0; i < sentenceList.size(); i++) {
+            wordList1 = sentenceList.get(i).getWordList();
+            wordList2 = text.sentenceList.get(i).getWordList();
+            if (wordList1.size() != wordList2.size()){
+                return false;
+            }
+            for (int i1 = 0; i1 < wordList1.size(); i1++) {
+                if (!wordList1.get(i1).getValue().equals(wordList1.get(i1).getValue())){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(head, sentenceList);
     }
 
     @Override

@@ -3,6 +3,7 @@ package by.training.task04.controller;
 import by.training.task04.entity.Word;
 import by.training.task04.service.TextService;
 import by.training.task04.service.impl.TextServiceImpl;
+import by.training.task04.util.TextGenerator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -128,5 +129,16 @@ public class TextController {
             logger.error("NumberFormatException");
         }
         return message;
+    }
+
+    public String generateTextToFile(String numberOfSentencesString){
+        String message = "Error parsing";
+        int numberOfSentences = 0;
+        try {
+            numberOfSentences = Integer.parseInt(numberOfSentencesString);
+        } catch (NumberFormatException e){
+            logger.error("NumberFormatException");
+        }
+        return TextGenerator.generateTextToFile(numberOfSentences);
     }
 }

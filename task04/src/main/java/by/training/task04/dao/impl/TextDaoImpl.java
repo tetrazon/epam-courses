@@ -12,6 +12,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
+/**
+ * class for working with Text entities saved in repository
+ */
 public class TextDaoImpl implements TextDao {
     private static final Logger logger = LogManager.getLogger(TextDaoImpl.class);
 
@@ -77,7 +80,7 @@ public class TextDaoImpl implements TextDao {
             throw new TextDaoException("empty/null sentence");
         }
         Text text = extractText(index);
-        text.getSentenceList().add(sentence);
+        text.addSentence(sentence);
         repository.update(text.toString(), index);
 
     }

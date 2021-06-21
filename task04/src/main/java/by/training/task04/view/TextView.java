@@ -8,6 +8,9 @@ import org.apache.logging.log4j.Logger;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * class for working the client with the application
+ */
 public class TextView {
     private static final Logger logger = LogManager.getLogger(TextView.class);
 
@@ -41,7 +44,7 @@ public class TextView {
         while(true){
             System.out.println(mm.getString("menu.options"));
             request = getRequest(sc);
-            if (request.equals("10")){
+            if (request.equals("11")){
                 break;
             }
             switch (request){
@@ -81,13 +84,14 @@ public class TextView {
                     System.out.println(mm.getString("menu.text.delete"));
                     System.out.println(textController.delete(getRequest(sc)));
                     break;
-                default:
-                    System.out.println("wrong command, try again");
+                case "10":
+                    System.out.println(mm.getString("menu.text.generateText"));
+                    System.out.println(textController.generateTextToFile(getRequest(sc)));
                     break;
-
+                default:
+                    System.out.println(mm.getString("menu.text.errorInput"));
+                    break;
             }
-
-
 
         }
 

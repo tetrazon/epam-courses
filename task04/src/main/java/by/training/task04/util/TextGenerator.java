@@ -1,5 +1,6 @@
 package by.training.task04.util;
 
+import by.training.task04.exception.TextGeneratorError;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,22 +13,25 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextGenerator {
+/**
+ * class - text generator
+ */
+public final class TextGenerator {
     private static final Logger logger = LogManager.getLogger(TextGenerator.class);
 
-    private final static List<String> STRING_LIST_11 = List.of("this", "the", "every");
-    private final static List<String> STRING_LIST_12 = List.of("cat", "universe", "autogeneration", "ship", "bamboo", "star");
-    private final static List<String> STRING_LIST_13 = List.of("is", "isn't");
-    private final static List<String> STRING_LIST_14 = List.of("old", "ancient", "expensive", "cool", "boring");
+    private static final List<String> STRING_LIST_11 = List.of("this", "the", "every");
+    private static final List<String> STRING_LIST_12 = List.of("cat", "universe", "autogeneration", "ship", "bamboo", "star");
+    private static final List<String> STRING_LIST_13 = List.of("is", "isn't");
+    private static final List<String> STRING_LIST_14 = List.of("old", "ancient", "expensive", "cool", "boring");
 
-    private final static List<String> STRING_LIST_21 = List.of("these", "the most of", "none of");
-    private final static List<String> STRING_LIST_22 = List.of("apples", "boxes", "computers", "shoes", "miners");
-    private final static List<String> STRING_LIST_23 = List.of("are", "aren't");
-    private final static List<String> STRING_LIST_24 = List.of("conceptual", "meaningless", "never existed", "complex", "fine");
+    private static final List<String> STRING_LIST_21 = List.of("these", "the most of", "none of");
+    private static final List<String> STRING_LIST_22 = List.of("apples", "boxes", "computers", "shoes", "miners");
+    private static final List<String> STRING_LIST_23 = List.of("are", "aren't");
+    private static final List<String> STRING_LIST_24 = List.of("conceptual", "meaningless", "never existed", "complex", "fine");
 
-    private final String PATH_TO_FILE = "src/main/resources/text/";
+    private static final String PATH_TO_FILE = "src/main/resources/text/";
 
-    public String generateTextToFile(int sentencesNumber){
+    public static String generateTextToFile(int sentencesNumber){
 
         int sizeOfStringList11 = STRING_LIST_11.size();
         int sizeOfStringList12 = STRING_LIST_12.size();
@@ -65,8 +69,9 @@ public class TextGenerator {
         File newTextFile = new File(PATH_TO_FILE + System.currentTimeMillis() + ".txt");
         try (FileWriter fw = new FileWriter(newTextFile)) {
                 fw.write(sb.toString());
-        } catch (IOException iox) {
-
+        } catch (IOException e) {
+            logger.error("creation file error");
+            throw new TextGeneratorError("creation file error");
         }
 
         return newTextFile.toString();

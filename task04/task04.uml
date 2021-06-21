@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>by.training.task04.entity.MessageManager</OriginalElement>
+  <nodes>
+    <node x="239.0" y="44.0">lombok.Setter</node>
+    <node x="1936.677279874214" y="1101.0">by.training.task04.exception.TextDaoException</node>
+    <node x="1753.677279874214" y="1101.0">by.training.task04.exception.TextGeneratorError</node>
+    <node x="461.0" y="44.0">lombok.Getter</node>
+    <node x="1387.9272798742138" y="1101.0">by.training.task04.exception.RepositoryException</node>
+    <node x="2263.427279874214" y="1463.0">by.training.task04.entity.MessageManager</node>
+    <node x="1732.177279874214" y="1386.0">by.training.task04.util.TextGenerator</node>
+    <node x="220.09866352201243" y="550.0">by.training.task04.entity.Sentence</node>
+    <node x="2126.677279874214" y="925.0">java.lang.Enum</node>
+    <node x="414.40055031446514" y="1430.0">by.training.task04.util.Parser</node>
+    <node x="463.3671383647801" y="295.0">by.training.task04.entity.Word</node>
+    <node x="844.9272798742139" y="1101.0">by.training.task04.exception.ParseException</node>
+    <node x="2249.927279874214" y="1816.0">by.training.task04.view.TextView</node>
+    <node x="528.9213836477985" y="1739.0">by.training.task04.service.impl.TextServiceImpl</node>
+    <node x="546.9272798742139" y="925.0">by.training.task04.entity.Text</node>
+    <node x="1411.177279874214" y="1783.0">by.training.task04.repository.impl.RepositoryImpl</node>
+    <node x="0.0" y="0.0">lombok.EqualsAndHashCode</node>
+    <node x="1524.025550314465" y="2092.0">by.training.task04.Runner</node>
+    <node x="1608.6690251572322" y="693.0">java.io.Serializable</node>
+    <node x="1530.177279874214" y="1473.0">by.training.task04.repository.Repository</node>
+    <node x="2084.1588050314467" y="681.0">java.lang.constant.Constable</node>
+    <node x="1191.927279874214" y="1418.0">by.training.task04.service.TextService</node>
+    <node x="2448.1588050314467" y="681.0">java.lang.Comparable</node>
+    <node x="683.0" y="44.0">lombok.AllArgsConstructor</node>
+    <node x="1001.9272798742139" y="1101.0">by.training.task04.exception.TextParserException</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="by.training.task04.service.impl.TextServiceImpl" target="by.training.task04.entity.Text">
+      <point x="22.5" y="-146.5" />
+      <point x="686.4213836477985" y="1699.0" />
+      <point x="776.4422169811319" y="1699.0" />
+      <point x="776.4422169811319" y="1346.0" />
+      <point x="778.5939465408807" y="1346.0" />
+      <point x="92.66666666666674" y="190.5" />
+    </edge>
+    <edge source="by.training.task04.entity.Word" target="lombok.Setter">
+      <point x="-22.875" y="-102.5" />
+      <point x="531.9921383647801" y="225.0" />
+      <point x="340.0" y="225.0" />
+      <point x="0.0" y="48.5" />
+    </edge>
+    <edge source="by.training.task04.exception.TextGeneratorError" target="java.io.Serializable">
+      <point x="0.0" y="-14.5" />
+      <point x="1835.177279874214" y="905.0" />
+      <point x="1681.0023584905657" y="905.0" />
+      <point x="10.333333333333371" y="14.5" />
+    </edge>
+    <edge source="by.training.task04.entity.Sentence" target="lombok.Setter">
+      <point x="-60.25" y="-157.5" />
+      <point x="280.34866352201243" y="530.0" />
+      <point x="299.01297169811346" y="530.0" />
+      <point x="299.01297169811346" y="275.0" />
+      <point x="272.66666666666674" y="275.0" />
+      <point x="-67.33333333333326" y="48.5" />
+    </edge>
+    <edge source="by.training.task04.entity.Word" target="lombok.Getter">
+      <point x="22.875" y="-102.5" />
+      <point x="577.7421383647801" y="245.0" />
+      <point x="562.0" y="245.0" />
+      <point x="0.0" y="48.5" />
+    </edge>
+    <edge source="by.training.task04.util.TextGenerator" target="by.training.task04.exception.TextGeneratorError">
+      <point x="0.0" y="-146.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="by.training.task04.util.Parser" target="by.training.task04.entity.Sentence">
+      <point x="-85.625" y="-102.5" />
+      <point x="465.77555031446514" y="1356.0" />
+      <point x="350.1796383647801" y="1356.0" />
+      <point x="350.1796383647801" y="905.0" />
+      <point x="360.6819968553459" y="905.0" />
+      <point x="20.083333333333485" y="157.5" />
+    </edge>
+    <edge source="by.training.task04.entity.Word" target="lombok.AllArgsConstructor">
+      <point x="68.625" y="-102.5" />
+      <point x="623.4921383647801" y="265.0" />
+      <point x="793.5" y="265.0" />
+      <point x="0.0" y="48.5" />
+    </edge>
+    <edge source="by.training.task04.entity.Sentence" target="by.training.task04.entity.Word">
+      <point x="100.41666666666652" y="-157.5" />
+      <point x="441.01533018867894" y="530.0" />
+      <point x="509.1171383647801" y="530.0" />
+      <point x="-45.75" y="102.5" />
+    </edge>
+    <edge source="by.training.task04.entity.Text" target="lombok.Setter">
+      <point x="23.166666666666742" y="-190.5" />
+      <point x="709.0939465408807" y="905.0" />
+      <point x="725.4374999999999" y="905.0" />
+      <point x="725.4374999999999" y="215.0" />
+      <point x="407.33333333333326" y="215.0" />
+      <point x="67.33333333333326" y="48.5" />
+    </edge>
+    <edge source="by.training.task04.exception.TextParserException" target="java.io.Serializable">
+      <point x="0.0" y="-14.5" />
+      <point x="1086.4272798742138" y="895.0" />
+      <point x="1639.6690251572322" y="895.0" />
+      <point x="-31.0" y="14.5" />
+    </edge>
+    <edge source="by.training.task04.Runner" target="by.training.task04.repository.Repository">
+      <point x="12.333333333333371" y="-26.5" />
+      <point x="1610.3588836477984" y="2052.0" />
+      <point x="1666.677279874214" y="2052.0" />
+      <point x="45.5" y="59.5" />
+    </edge>
+    <edge source="by.training.task04.exception.TextDaoException" target="java.io.Serializable">
+      <point x="0.0" y="-14.5" />
+      <point x="2011.677279874214" y="895.0" />
+      <point x="1701.6690251572322" y="895.0" />
+      <point x="31.0" y="14.5" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.io.Serializable">
+      <point x="-99.0" y="-190.5" />
+      <point x="2176.177279874214" y="885.0" />
+      <point x="1722.335691823899" y="885.0" />
+      <point x="51.66666666666663" y="14.5" />
+    </edge>
+    <edge source="by.training.task04.exception.RepositoryException" target="java.io.Serializable">
+      <point x="0.0" y="-14.5" />
+      <point x="1472.4272798742138" y="905.0" />
+      <point x="1660.335691823899" y="905.0" />
+      <point x="-10.333333333333371" y="14.5" />
+    </edge>
+    <edge source="by.training.task04.util.Parser" target="by.training.task04.exception.ParseException">
+      <point x="85.625" y="-102.5" />
+      <point x="637.0255503144651" y="1356.0" />
+      <point x="913.4272798742139" y="1356.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="by.training.task04.util.Parser" target="by.training.task04.entity.Word">
+      <point x="-17.125" y="-102.5" />
+      <point x="534.2755503144651" y="1366.0" />
+      <point x="536.4272798742139" y="1366.0" />
+      <point x="536.4272798742139" y="530.0" />
+      <point x="570.1171383647801" y="530.0" />
+      <point x="15.25" y="102.5" />
+    </edge>
+    <edge source="by.training.task04.view.TextView" target="by.training.task04.entity.MessageManager">
+      <point x="0.0" y="-69.5" />
+      <point x="0.0" y="69.5" />
+    </edge>
+    <edge source="by.training.task04.Runner" target="by.training.task04.service.TextService">
+      <point x="-37.0" y="-26.5" />
+      <point x="1561.025550314465" y="2062.0" />
+      <point x="1394.427279874214" y="2062.0" />
+      <point x="67.5" y="114.5" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.lang.Enum">
+      <point x="-74.25" y="190.5" />
+      <point x="2200.927279874214" y="1326.0" />
+      <point x="2106.677279874214" y="1326.0" />
+      <point x="2106.677279874214" y="1115.5" />
+      <point x="-148.5" y="-0.0" />
+    </edge>
+    <edge source="by.training.task04.service.impl.TextServiceImpl" target="by.training.task04.service.TextService">
+      <point x="112.5" y="-146.5" />
+      <point x="776.4213836477985" y="1719.0" />
+      <point x="1259.427279874214" y="1719.0" />
+      <point x="-67.5" y="114.5" />
+    </edge>
+    <edge source="by.training.task04.exception.ParseException" target="java.io.Serializable">
+      <point x="0.0" y="-14.5" />
+      <point x="913.4272798742139" y="885.0" />
+      <point x="1619.0023584905657" y="885.0" />
+      <point x="-51.66666666666663" y="14.5" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.lang.constant.Constable">
+      <point x="0.0" y="-190.5" />
+      <point x="2275.177279874214" y="905.0" />
+      <point x="2256.1588050314467" y="905.0" />
+      <point x="0.0" y="26.5" />
+    </edge>
+    <edge source="by.training.task04.entity.Text" target="by.training.task04.entity.Sentence">
+      <point x="-69.5" y="-190.5" />
+      <point x="616.4272798742139" y="895.0" />
+      <point x="441.01533018867894" y="895.0" />
+      <point x="100.41666666666652" y="157.5" />
+    </edge>
+    <edge source="by.training.task04.entity.Sentence" target="lombok.EqualsAndHashCode">
+      <point x="-100.41666666666674" y="-157.5" />
+      <point x="240.1819968553457" y="530.0" />
+      <point x="54.75" y="530.0" />
+      <point x="-54.75" y="92.5" />
+    </edge>
+    <edge source="by.training.task04.entity.Word" target="lombok.EqualsAndHashCode">
+      <point x="-68.625" y="-102.5" />
+      <point x="486.2421383647801" y="235.0" />
+      <point x="164.25" y="235.0" />
+      <point x="54.75" y="92.5" />
+    </edge>
+    <edge source="by.training.task04.entity.Text" target="by.training.task04.entity.Word">
+      <point x="-23.166666666666742" y="-190.5" />
+      <point x="662.7606132075472" y="895.0" />
+      <point x="714.4374999999999" y="895.0" />
+      <point x="714.4374999999999" y="530.0" />
+      <point x="600.6171383647801" y="530.0" />
+      <point x="45.75" y="102.5" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.lang.Comparable">
+      <point x="99.0" y="-190.5" />
+      <point x="2374.177279874214" y="905.0" />
+      <point x="2518.1588050314467" y="905.0" />
+      <point x="0.0" y="26.5" />
+    </edge>
+    <edge source="by.training.task04.Runner" target="by.training.task04.view.TextView">
+      <point x="61.66666666666663" y="-26.5" />
+      <point x="1659.6922169811317" y="2072.0" />
+      <point x="2399.177279874214" y="2072.0" />
+      <point x="49.75" y="69.5" />
+    </edge>
+    <edge source="by.training.task04.service.impl.TextServiceImpl" target="by.training.task04.entity.Word">
+      <point x="67.5" y="-146.5" />
+      <point x="731.4213836477985" y="1709.0" />
+      <point x="1181.4272798742138" y="1709.0" />
+      <point x="1181.4272798742138" y="520.0" />
+      <point x="631.1171383647801" y="520.0" />
+      <point x="76.25" y="102.5" />
+    </edge>
+    <edge source="by.training.task04.entity.MessageManager" target="java.lang.Enum">
+      <point x="0.0" y="-69.5" />
+      <point x="74.25" y="190.5" />
+    </edge>
+    <edge source="by.training.task04.repository.impl.RepositoryImpl" target="by.training.task04.exception.RepositoryException">
+      <point x="-61.250000000000114" y="-102.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="by.training.task04.entity.Text" target="lombok.AllArgsConstructor">
+      <point x="115.83333333333326" y="-190.5" />
+      <point x="801.7606132075472" y="905.0" />
+      <point x="765.6273584905656" y="905.0" />
+      <point x="765.6273584905656" y="275.0" />
+      <point x="867.1666666666665" y="275.0" />
+      <point x="73.66666666666652" y="48.5" />
+    </edge>
+    <edge source="by.training.task04.entity.Text" target="lombok.Getter">
+      <point x="69.5" y="-190.5" />
+      <point x="754.6273584905656" y="205.0" />
+      <point x="629.3333333333333" y="205.0" />
+      <point x="67.33333333333326" y="48.5" />
+    </edge>
+    <edge source="by.training.task04.service.impl.TextServiceImpl" target="by.training.task04.util.Parser">
+      <point x="-22.5" y="-146.5" />
+      <point x="641.4213836477985" y="1699.0" />
+      <point x="551.4005503144651" y="1699.0" />
+      <point x="0.0" y="102.5" />
+    </edge>
+    <edge source="by.training.task04.Runner" target="by.training.task04.repository.impl.RepositoryImpl">
+      <point x="-12.333333333333371" y="-26.5" />
+      <point x="1585.6922169811317" y="2052.0" />
+      <point x="1533.677279874214" y="2052.0" />
+      <point x="0.0" y="102.5" />
+    </edge>
+    <edge source="by.training.task04.util.Parser" target="by.training.task04.exception.TextParserException">
+      <point x="119.875" y="-102.5" />
+      <point x="671.2755503144651" y="1366.0" />
+      <point x="1086.4272798742138" y="1366.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="by.training.task04.repository.impl.RepositoryImpl" target="by.training.task04.repository.Repository">
+      <point x="61.249999999999886" y="-102.5" />
+      <point x="1594.9272798742138" y="1719.0" />
+      <point x="1575.677279874214" y="1719.0" />
+      <point x="-45.5" y="59.5" />
+    </edge>
+    <edge source="by.training.task04.entity.Sentence" target="lombok.AllArgsConstructor">
+      <point x="20.083333333333485" y="-157.5" />
+      <point x="360.6819968553459" y="255.0" />
+      <point x="719.8333333333333" y="255.0" />
+      <point x="-73.66666666666674" y="48.5" />
+    </edge>
+    <edge source="by.training.task04.service.impl.TextServiceImpl" target="by.training.task04.entity.Sentence">
+      <point x="-112.5" y="-146.5" />
+      <point x="551.4213836477985" y="1719.0" />
+      <point x="308.8671383647801" y="1719.0" />
+      <point x="308.8671383647801" y="905.0" />
+      <point x="240.1819968553457" y="905.0" />
+      <point x="-100.41666666666674" y="157.5" />
+    </edge>
+    <edge source="by.training.task04.Runner" target="by.training.task04.service.impl.TextServiceImpl">
+      <point x="-61.66666666666663" y="-26.5" />
+      <point x="1536.3588836477984" y="2072.0" />
+      <point x="663.9213836477985" y="2072.0" />
+      <point x="0.0" y="146.5" />
+    </edge>
+    <edge source="by.training.task04.entity.Sentence" target="lombok.Getter">
+      <point x="-20.083333333333485" y="-157.5" />
+      <point x="320.51533018867894" y="530.0" />
+      <point x="310.01297169811346" y="530.0" />
+      <point x="310.01297169811346" y="245.0" />
+      <point x="494.66666666666674" y="245.0" />
+      <point x="-67.33333333333326" y="48.5" />
+    </edge>
+    <edge source="by.training.task04.util.Parser" target="by.training.task04.entity.Text">
+      <point x="51.375" y="-102.5" />
+      <point x="602.7755503144651" y="1346.0" />
+      <point x="685.9272798742139" y="1346.0" />
+      <point x="0.0" y="190.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.49534883720930245" x="317.7360927984686" y="1728.6150234741783" />
+  <SelectedNodes>
+    <node>by.training.task04.entity.Text</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
