@@ -1,4 +1,4 @@
-package by.training.task04.exception;
+package by.training.task04.repository;
 
 public class RepositoryException extends RuntimeException {
     /**

@@ -1,9 +1,7 @@
 package by.training.task04.repository.impl;
 
-import by.training.task04.exception.RepositoryException;
+import by.training.task04.repository.RepositoryException;
 import by.training.task04.repository.Repository;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
