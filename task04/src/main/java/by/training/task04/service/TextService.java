@@ -1,13 +1,15 @@
 package by.training.task04.service;
 
+import by.training.task04.entity.Text;
+
 public interface TextService {
-    String createFromFile(String fileName);
-    String read(int index);
+    int createFromFile(String fileName);
+    Text read(int index);
     String getHead(int textId);
-    String setHead(int textId, String head);
+    void setHead(int textId, String head);
     String getSentences(int textId);
-    String addSentence(int textId, String sentenceString);
-    String delete(int textId);
-    String addWordInSentence(int textId, int sentenceIndex, String newWordString);
-    String removeWordInSentence(int textId, int sentenceIndex, int wordIndexToDelete);
+    Text addSentence(int textId, String sentenceString);
+    void delete(int textId);
+    void addWordInSentence(int textId, int sentenceIndex, String newWordString);
+    void removeWordInSentence(int textId, int sentenceIndex, int wordIndexToDelete);
 }

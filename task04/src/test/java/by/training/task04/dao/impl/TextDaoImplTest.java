@@ -3,16 +3,13 @@ package by.training.task04.dao.impl;
 import by.training.task04.entity.Sentence;
 import by.training.task04.entity.Text;
 import by.training.task04.entity.Word;
-import by.training.task04.exception.ParseException;
-import by.training.task04.exception.TextDaoException;
-import by.training.task04.exception.TextParserException;
+import by.training.task04.util.exception.TextParserException;
 import by.training.task04.repository.impl.RepositoryImpl;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.TreeSet;
 
 import static org.testng.Assert.*;
 

@@ -3,8 +3,7 @@ package by.training.task04.util;
 import by.training.task04.entity.Sentence;
 import by.training.task04.entity.Text;
 import by.training.task04.entity.Word;
-import by.training.task04.exception.ParseException;
-import by.training.task04.exception.TextParserException;
+import by.training.task04.util.exception.TextParserException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

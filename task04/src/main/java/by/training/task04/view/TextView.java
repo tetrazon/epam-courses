@@ -13,6 +13,8 @@ import java.util.Scanner;
  */
 public class TextView {
     private static final Logger logger = LogManager.getLogger(TextView.class);
+    private static final String OK_STATUS = "command has performed successfully";
+    private static final String ERROR_STATUS = "wrong command: ";
 
     private TextController textController;
 
@@ -47,50 +49,59 @@ public class TextView {
             if (request.equals("11")){
                 break;
             }
-            switch (request){
-                case "1":
-                    System.out.println(mm.getString("menu.text.createFromFile"));
-                    System.out.println(textController.createFromFile(getRequest(sc)));
-                    break;
-                case "2":
-                    System.out.println(mm.getString("menu.text.writeToConsole"));
-                    System.out.println(textController.read(getRequest(sc)));
-                    break;
-                case "3":
-                    System.out.println(mm.getString("menu.text.getParam"));
-                    System.out.println(textController.getHead(getRequest(sc)));
-                    break;
-                case "4":
-                    System.out.println(mm.getString("menu.text.changeHead"));
-                    System.out.println(textController.setHead(getRequest(sc)));
-                    break;
-                case "5":
-                    System.out.println(mm.getString("menu.text.getParam"));
-                    System.out.println(textController.getSentences(getRequest(sc)));
-                    break;
-                case "6":
-                    System.out.println(mm.getString("menu.text.addSentence"));
-                    System.out.println(textController.addSentence(getRequest(sc)));
-                    break;
-                case "7":
-                    System.out.println(mm.getString("menu.text.addWord"));
-                    System.out.println(textController.addWordInSentence(getRequest(sc)));
-                    break;
-                case "8":
-                    System.out.println(mm.getString("menu.text.removeWord"));
-                    System.out.println(textController.removeWordInSentence(getRequest(sc)));
-                    break;
-                case "9":
-                    System.out.println(mm.getString("menu.text.delete"));
-                    System.out.println(textController.delete(getRequest(sc)));
-                    break;
-                case "10":
-                    System.out.println(mm.getString("menu.text.generateText"));
-                    System.out.println(textController.generateTextToFile(getRequest(sc)));
-                    break;
-                default:
-                    System.out.println(mm.getString("menu.text.errorInput"));
-                    break;
+            try{
+                switch (request){
+                    case "1":
+                        System.out.println(mm.getString("menu.text.createFromFile"));
+                        System.out.println(textController.createFromFile(getRequest(sc)));
+                        break;
+                    case "2":
+                        System.out.println(mm.getString("menu.text.writeToConsole"));
+                        System.out.println(textController.read(getRequest(sc)));
+                        break;
+                    case "3":
+                        System.out.println(mm.getString("menu.text.getParam"));
+                        System.out.println(textController.getHead(getRequest(sc)));
+                        break;
+                    case "4":
+                        System.out.println(mm.getString("menu.text.changeHead"));
+                        textController.setHead(getRequest(sc));
+                        System.out.println(OK_STATUS);
+                        break;
+                    case "5":
+                        System.out.println(mm.getString("menu.text.getParam"));
+                        System.out.println(textController.getSentences(getRequest(sc)));
+                        break;
+                    case "6":
+                        System.out.println(mm.getString("menu.text.addSentence"));
+                        System.out.println(textController.addSentence(getRequest(sc)));
+                        break;
+                    case "7":
+                        System.out.println(mm.getString("menu.text.addWord"));
+                        textController.addWordInSentence(getRequest(sc));
+                        System.out.println(OK_STATUS);
+                        break;
+                    case "8":
+                        System.out.println(mm.getString("menu.text.removeWord"));
+                        textController.removeWordInSentence(getRequest(sc));
+                        System.out.println(OK_STATUS);
+                        break;
+                    case "9":
+                        System.out.println(mm.getString("menu.text.delete"));
+                        textController.delete(getRequest(sc));
+                        System.out.println(OK_STATUS);
+                        break;
+                    case "10":
+                        System.out.println(mm.getString("menu.text.generateText"));
+                        System.out.println(textController.generateTextToFile(getRequest(sc)));
+                        break;
+                    default:
+                        System.out.println(mm.getString("menu.text.errorInput"));
+                        break;
+                }
+            } catch (Exception e){
+                logger.error("error performing command", e);
+                System.out.println(ERROR_STATUS + e.getMessage());
             }
 
         }

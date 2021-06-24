@@ -14,9 +14,6 @@ import java.util.Optional;
  */
 public class RepositoryImpl implements Repository<String> {
 
-    private static final Logger logger = LogManager.getLogger(RepositoryImpl.class);
-
-
     private List<String> stringRepo = new ArrayList<>();
     @Override
     public int create(String string) {
@@ -32,8 +29,7 @@ public class RepositoryImpl implements Repository<String> {
     }
 
     private void throwExceptionIfOutOfBand(int id) {
-        if (id < 0 || id > stringRepo.size()){
-            logger.error("index out of band");
+        if (id < 0 || id > stringRepo.size() -1){
             throw new RepositoryException("index out of band");
         }
     }

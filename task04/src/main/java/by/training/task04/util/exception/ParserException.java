@@ -1,12 +1,12 @@
-package by.training.task04.exception;
+package by.training.task04.util.exception;
 
-public class ParseException extends RuntimeException {
+public class ParserException extends RuntimeException {
     /**
      * Constructs a new runtime exception with {@code null} as its
      * detail message.  The cause is not initialized, and may subsequently be
      * initialized by a call to {@link #initCause}.
      */
-    public ParseException() {
+    public ParserException() {
     }
 
     /**
@@ -17,7 +17,7 @@ public class ParseException extends RuntimeException {
      * @param message the detail message. The detail message is saved for
      *                later retrieval by the {@link #getMessage()} method.
      */
-    public ParseException(String message) {
+    public ParserException(String message) {
         super(message);
     }
 
@@ -35,7 +35,7 @@ public class ParseException extends RuntimeException {
      *                unknown.)
      * @since 1.4
      */
-    public ParseException(String message, Throwable cause) {
+    public ParserException(String message, Throwable cause) {
         super(message, cause);
     }
 
@@ -52,7 +52,7 @@ public class ParseException extends RuntimeException {
      *              unknown.)
      * @since 1.4
      */
-    public ParseException(Throwable cause) {
+    public ParserException(Throwable cause) {
         super(cause);
     }
 }

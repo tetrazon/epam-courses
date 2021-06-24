@@ -1,12 +1,12 @@
-package by.training.task04.exception;
+package by.training.task04.dao.exception;
 
-public class TextGeneratorError extends RuntimeException {
+public class TextDaoException extends RuntimeException {
     /**
      * Constructs a new runtime exception with {@code null} as its
      * detail message.  The cause is not initialized, and may subsequently be
      * initialized by a call to {@link #initCause}.
      */
-    public TextGeneratorError() {
+    public TextDaoException() {
     }
 
     /**
@@ -17,7 +17,7 @@ public class TextGeneratorError extends RuntimeException {
      * @param message the detail message. The detail message is saved for
      *                later retrieval by the {@link #getMessage()} method.
      */
-    public TextGeneratorError(String message) {
+    public TextDaoException(String message) {
         super(message);
     }
 
@@ -35,7 +35,7 @@ public class TextGeneratorError extends RuntimeException {
      *                unknown.)
      * @since 1.4
      */
-    public TextGeneratorError(String message, Throwable cause) {
+    public TextDaoException(String message, Throwable cause) {
         super(message, cause);
     }
 
@@ -52,7 +52,7 @@ public class TextGeneratorError extends RuntimeException {
      *              unknown.)
      * @since 1.4
      */
-    public TextGeneratorError(Throwable cause) {
+    public TextDaoException(Throwable cause) {
         super(cause);
     }
 }

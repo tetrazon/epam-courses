@@ -1,4 +1,4 @@
-package by.training.task04.exception;
+package by.training.task04.util.exception;
 
 public class TextParserException extends RuntimeException {
     /**

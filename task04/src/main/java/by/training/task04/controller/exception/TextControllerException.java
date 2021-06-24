@@ -1,12 +1,12 @@
-package by.training.task04.exception;
+package by.training.task04.controller.exception;
 
-public class TextDaoException extends RuntimeException {
+public class TextControllerException extends RuntimeException {
     /**
      * Constructs a new runtime exception with {@code null} as its
      * detail message.  The cause is not initialized, and may subsequently be
      * initialized by a call to {@link #initCause}.
      */
-    public TextDaoException() {
+    public TextControllerException() {
     }
 
     /**
@@ -17,7 +17,7 @@ public class TextDaoException extends RuntimeException {
      * @param message the detail message. The detail message is saved for
      *                later retrieval by the {@link #getMessage()} method.
      */
-    public TextDaoException(String message) {
+    public TextControllerException(String message) {
         super(message);
     }
 
@@ -35,7 +35,7 @@ public class TextDaoException extends RuntimeException {
      *                unknown.)
      * @since 1.4
      */
-    public TextDaoException(String message, Throwable cause) {
+    public TextControllerException(String message, Throwable cause) {
         super(message, cause);
     }
 
@@ -52,7 +52,7 @@ public class TextDaoException extends RuntimeException {
      *              unknown.)
      * @since 1.4
      */
-    public TextDaoException(Throwable cause) {
+    public TextControllerException(Throwable cause) {
         super(cause);
     }
 }

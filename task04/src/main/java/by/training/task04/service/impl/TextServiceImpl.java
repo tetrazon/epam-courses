@@ -5,6 +5,7 @@ import by.training.task04.entity.Sentence;
 import by.training.task04.entity.Text;
 import by.training.task04.entity.Word;
 import by.training.task04.service.TextService;
+import by.training.task04.service.exception.TextServiceException;
 import by.training.task04.util.Parser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,146 +26,100 @@ public class TextServiceImpl implements TextService {
     }
 
     @Override
-    public String createFromFile(String fileName) {
-        String message = "null/empty file name";
-        if (fileName == null || fileName.isEmpty()){
-            logger.error(message);
-        } else {
-            message = String.valueOf(textDao.createFromFile(fileName));
+    public int createFromFile(String fileName) {
+        if (fileName == null || fileName.isEmpty()) {
+            throw new TextServiceException("null/empty file name");
         }
+        return textDao.createFromFile(fileName);
+    }
 
-       return message;
+    private void checkIndex(int index){
+        if (index < 0){
+            throw new TextServiceException("incorrect index");
+        }
     }
 
     @Override
-    public String read(int index) {
-        String message = "incorrect index";
-        if (index < 0){
-            logger.error(message);
-        } else {
-            Optional<Text> optionalText = textDao.read(index);
-            if (optionalText.isPresent()){
-                message = optionalText.get().toString();
-            }
-        }
-
-        return message;
+    public Text read(int index) {
+        checkIndex(index);
+        Optional<Text> optionalText = textDao.read(index);
+        return optionalText.orElseThrow(()-> new TextServiceException("wrong index"));
     }
 
     @Override
     public String getHead(int index) {
-        String message = "incorrect index";
-        if (index < 0){
-            logger.error(message);
-        } else {
-            Optional<Text> optionalText = textDao.read(index);
-            if (optionalText.isPresent()){
-                message = optionalText.get().getHead();
-            }
-        }
-        return message;
+        checkIndex(index);
+        Optional<Text> optionalText = textDao.read(index);
+        return optionalText
+                .map(Text::getHead)
+                .orElseThrow(()-> new TextServiceException("wrong index"));
     }
 
     @Override
-    public String setHead(int index, String head) {
-        String message = "ok";
-        if (head == null || head.isEmpty()){
-            message = "null/empty head";
-            logger.error(message);
-        }else if (index < 0){
-            message = "incorrect index";
-            logger.error(message);
-        } else {
-            Optional<Text> optionalText = textDao.read(index);
-            if (optionalText.isPresent()){
-                Text text = optionalText.get();
-                text.setHead(head);
-                textDao.update(index, text);
-            } else {
-                message = "error: null text";
-            }
+    public void setHead(int index, String head) {
+        checkIndex(index);
+        if (head == null || head.isEmpty()) {
+            throw  new TextServiceException("null/empty head!");
         }
 
-        return message;
+        Optional<Text> optionalText = textDao.read(index);
+        if (optionalText.isPresent()){
+            Text text = optionalText.get();
+            text.setHead(head);
+            textDao.update(index, text);
+        } else {
+            throw  new TextServiceException("error: null text");
+        }
     }
 
     @Override
     public String getSentences(int index) {
-        String message = "incorrect index";
-        if (index < 0){
-            logger.error(message);
-        } else {
-            Optional<Text> optionalText = textDao.read(index);
-            if (optionalText.isPresent()){
-                message = optionalText.get().SentencesToString();
-            }
-        }
-
-        return message;
+        checkIndex(index);
+        Optional<Text> optionalText = textDao.read(index);
+        return optionalText
+                .map(Text::SentencesToString)
+                .orElseThrow(()-> new TextServiceException("wrong index"));
     }
 
     @Override
-    public String addSentence(int index, String sentenceString) {
-        String message = "incorrect index";
-        if (index < 0){
-            logger.error(message);
-        } else if (sentenceString == null || sentenceString.isEmpty()){
-            message = "empty/null sentence";
-            logger.error(message);
-        } else {
-            Optional<Text> optionalText = textDao.read(index);
-            if (optionalText.isPresent()){
-                Text text = optionalText.get();
-                Sentence newSentence = new Sentence(Parser.parseStringToWordList(sentenceString));
-                textDao.addSentence(index, newSentence);
-                message = textDao.read(index).get().toString();
-            }
+    public Text addSentence(int index, String sentenceString) {
+        checkIndex(index);
+
+        if (sentenceString == null || sentenceString.isEmpty()){
+            throw new TextServiceException("empty/null sentence");
         }
 
-        return message;
+        Optional<Text> optionalText = textDao.read(index);
+        if (optionalText.isPresent()){
+            Sentence newSentence = new Sentence(Parser.parseStringToWordList(sentenceString));
+            textDao.addSentence(index, newSentence);
+            return textDao.read(index).get();
+        } else {
+            throw new TextServiceException("empty/null sentence");
+        }
     }
 
     @Override
-    public String delete(int index) {
-        String message = "incorrect index";
-        if (index < 0){
-            logger.error(message);
-        } else {
-            textDao.delete(index);
-            message = "ok";
-        }
-
-        return message;
-
+    public void delete(int index) {
+        checkIndex(index);
+        textDao.delete(index);
     }
 
     @Override
-    public String addWordInSentence(int index, int sentenceIndex, String newWordString) {
-        String message = "error adding";
-        if (index < 0 || sentenceIndex < 0){
-            message = "incorrect text/sentence index";
-            logger.error(message);
-        } else if (newWordString == null || newWordString.isEmpty()){
-            message = "empty/null word";
-            logger.error(message);
-        } else {
-            textDao.addWordInSentence(index, sentenceIndex, new Word(newWordString));
-            message = "ok";
+    public void addWordInSentence(int index, int sentenceIndex, String newWordString) {
+        checkIndex(index);
+        checkIndex(sentenceIndex);
+        if (newWordString == null || newWordString.isEmpty()){
+            throw new TextServiceException("empty/null word");
         }
-
-        return message;
+        textDao.addWordInSentence(index, sentenceIndex, new Word(newWordString));
     }
 
     @Override
-    public String removeWordInSentence(int index, int sentenceIndex, int wordIndexToDelete) {
-        String message = "error removing";
-        if (index < 0 || sentenceIndex < 0 || wordIndexToDelete < 0){
-            message = "incorrect text/sentence/word index";
-            logger.error(message);
-        } else {
-            textDao.removeWordInSentence(index, sentenceIndex, wordIndexToDelete);
-            message = "ok";
-        }
-        return message;
+    public void removeWordInSentence(int index, int sentenceIndex, int wordIndexToDelete) {
+        checkIndex(index);
+        checkIndex(sentenceIndex);
+        checkIndex(wordIndexToDelete);
+        textDao.removeWordInSentence(index, sentenceIndex, wordIndexToDelete);
     }
 }

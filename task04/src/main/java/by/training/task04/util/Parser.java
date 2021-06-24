@@ -3,8 +3,8 @@ package by.training.task04.util;
 import by.training.task04.entity.Sentence;
 import by.training.task04.entity.Text;
 import by.training.task04.entity.Word;
-import by.training.task04.exception.ParseException;
-import by.training.task04.exception.TextParserException;
+import by.training.task04.util.exception.ParserException;
+import by.training.task04.util.exception.TextParserException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -66,7 +66,7 @@ public final class Parser {
     public static List<Word> parseStringToWordList(String stringSentence) {
         if (stringSentence == null || stringSentence.isEmpty()){
             logger.error("null/empty string");
-            throw new ParseException("null/empty string");
+            throw new ParserException("null/empty string");
         }
         String[] stringWords;
         stringSentence = stringSentence.substring(0, stringSentence.length()-1);
