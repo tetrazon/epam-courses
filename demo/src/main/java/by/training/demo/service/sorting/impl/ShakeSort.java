@@ -16,15 +16,14 @@ public final class ShakeSort implements ArraySorting {
         //unsorted bounds
         int lowerBound = 1;
         int upperBound = arrayLength - 1;
-
-        int i, tmpBound = arrayLength - 1;
+        int tmpBound = arrayLength - 1;
 
 
         //doing sort in two directions:
         //from bottom to up and from up to bottom
         do {
             //going from bottom to up
-            for (i = upperBound; i > 0 ; i--) {
+            for (int i = upperBound; i > 0 ; i--) {
 
                 //if elements are not in proper position, swap it
                 //and update the tmp bound
@@ -39,7 +38,7 @@ public final class ShakeSort implements ArraySorting {
             lowerBound = tmpBound + 1;
 
             //going from up to bottom
-            for (i = 1; i <= upperBound; i++) {
+            for (int i = 1; i <= upperBound; i++) {
 
                 //if elements are not in proper position, swap it
                 //and update the tmp bound

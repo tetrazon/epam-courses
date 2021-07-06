@@ -28,6 +28,23 @@ public class Array<N extends Number> {
         values[j] = tmp;
     }
 
+    /**
+     Compares the two specified values. The sign
+     * of the integer value returned is the same as that of the
+     * integer that would be returned by the call:
+     * <pre>
+     *    new Double(d1).compareTo(new Double(d2))
+     * </pre>
+     * @param o1 first number
+     * @param o2 second number
+     * @param <N> N extends Number
+     * @return the value {@code 0} if o1 is
+     *          numerically equal to o2; a value less than
+     *          {@code 0} if o1 is numerically less than
+     *          o2; and a value greater than {@code 0}
+     *          if o1 is numerically greater than
+     *          o2.
+     */
     public static<N extends Number> int compare(N o1, N o2) {
         return Double.compare(o1.doubleValue(), o2.doubleValue());
     }

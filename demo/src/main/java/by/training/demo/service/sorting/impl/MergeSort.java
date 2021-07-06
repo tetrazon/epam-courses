@@ -13,6 +13,7 @@ public final class MergeSort implements ArraySorting {
      */
     @Override
     public void sort(Array array, boolean isAscending) {
+
         mergeSort(array, 0, array.getLength() - 1, isAscending);
     }
 
@@ -24,6 +25,7 @@ public final class MergeSort implements ArraySorting {
      * @param high
      * @param isAscending
      */
+    //left-right
     private void mergeSort(Array array, int low, int high, boolean isAscending) {
         if (high <= low) return;
 

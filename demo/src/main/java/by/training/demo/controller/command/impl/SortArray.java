@@ -20,7 +20,7 @@ public class SortArray implements Command {
         String[] requestArgs = request.split(" ");
         ArraySorting arraySorting = new ArraySortingProvider().getSorting(requestArgs[0]);
         String index = requestArgs[1];
-        boolean isAscending = Boolean.getBoolean(requestArgs[2]);
+        boolean isAscending = Boolean.parseBoolean(requestArgs[2]);
 
         try {
             result = arrayService.sort(arraySorting, index, isAscending);
