@@ -29,16 +29,6 @@ public final class TextGenerator {
 
     public static String generateTextToFile(int sentencesNumber){
 
-        int sizeOfStringList11 = STRING_LIST_11.size();
-        int sizeOfStringList12 = STRING_LIST_12.size();
-        int sizeOfStringList13 = STRING_LIST_13.size();
-        int sizeOfStringList14 = STRING_LIST_14.size();
-
-        int sizeOfStringList21 = STRING_LIST_21.size();
-        int sizeOfStringList22 = STRING_LIST_22.size();
-        int sizeOfStringList23 = STRING_LIST_23.size();
-        int sizeOfStringList24 = STRING_LIST_24.size();
-
         StringBuilder sb = new StringBuilder();
         double rand;
         for (int i = 0; i < sentencesNumber; i++) {

@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class TextView {
     private static final Logger logger = LogManager.getLogger(TextView.class);
     private static final String OK_STATUS = "command has performed successfully";
-    private static final String ERROR_STATUS = "wrong command: ";
+    private static final String ERROR_MESSAGE = "wrong command: ";
 
     private TextController textController;
 
@@ -101,7 +101,7 @@ public class TextView {
                 }
             } catch (Exception e){
                 logger.error("error performing command", e);
-                System.out.println(ERROR_STATUS + e.getMessage());
+                System.out.println(ERROR_MESSAGE + e.getMessage());
             }
 
         }

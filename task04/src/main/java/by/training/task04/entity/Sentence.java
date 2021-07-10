@@ -8,9 +8,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @AllArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode
+@NoArgsConstructor
+@Data
 public class Sentence {
     private List<Word> wordList;
 

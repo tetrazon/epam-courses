@@ -27,7 +27,7 @@ public class ParserTest {
         List<Sentence> sentenceList = List.of(sentence, sentence);
 
         return new Object[][]{
-                {"src/main/resources/text/testParse.txt", new Text("Test", sentenceList)}
+                {"src/test/resources/text/testParse.txt", new Text("Test", sentenceList)}
         };
     }
 

@@ -1,10 +1,8 @@
 package by.training.task04.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,6 +14,8 @@ public class Text {
     private List<Sentence> sentenceList;
 
     public Text() {
+        head = "";
+        sentenceList = new ArrayList<>();
     }
 
     /**
