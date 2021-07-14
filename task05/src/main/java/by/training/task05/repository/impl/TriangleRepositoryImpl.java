@@ -8,7 +8,6 @@ import by.training.task05.specification.SortSpecification;
 import by.training.task05.specification.Specification;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class TriangleRepositoryImpl implements TriangleRepository<Triangle> {
     private static int nextId = 1;
@@ -26,7 +25,7 @@ public class TriangleRepositoryImpl implements TriangleRepository<Triangle> {
     }
 
     @Override
-    public int create(Triangle triangle) {
+    public int create(Triangle triangle) throws TriangleRepositoryException {
         if (triangle == null){
             throw new TriangleRepositoryException("null triangle");
         }
@@ -37,13 +36,12 @@ public class TriangleRepositoryImpl implements TriangleRepository<Triangle> {
     }
 
     @Override
-    public void update(int id, Triangle triangle) {
+    public void update(int id, Triangle triangle) throws TriangleRepositoryException {
         if (triangle == null){
             throw new TriangleRepositoryException("null triangle");
         }
         triangle.setId(id);
         storage.replace(id, triangle);
-        //notify
     }
 
     @Override

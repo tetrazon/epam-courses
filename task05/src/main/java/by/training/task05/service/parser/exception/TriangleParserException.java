@@ -1,4 +1,4 @@
-package by.training.task05.parser.exception;
+package by.training.task05.service.parser.exception;
 
 public class TriangleParserException extends RuntimeException {
     /**

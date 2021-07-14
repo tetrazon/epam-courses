@@ -16,16 +16,12 @@ public class TrianglePropertyServiceImpl implements TrianglePropertyService {
     }
 
 
-    private void checkId(int id){
+    @Override
+    public TriangleProperty readPropertiesById(int id) throws TrianglePropertyServiceException {
         if (id < 0){
             throw new TrianglePropertyServiceException("incorrect id");
         }
-    }
-
-    @Override
-    public TriangleProperty readPropertiesById(int id) {
-        checkId(id);
         final Optional<TriangleProperty> optionalTriangleProperty = repository.read(id);
-        return optionalTriangleProperty.orElseThrow(()-> new TrianglePropertyServiceException("wrong id"));
+        return optionalTriangleProperty.orElseThrow(()-> new TrianglePropertyServiceException("null element by that id"));
     }
 }

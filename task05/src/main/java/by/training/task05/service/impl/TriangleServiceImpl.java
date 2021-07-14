@@ -2,7 +2,9 @@ package by.training.task05.service.impl;
 
 import by.training.task05.entity.Triangle;
 import by.training.task05.entity.observable.Observable;
-import by.training.task05.parser.TriangleParser;
+import by.training.task05.repository.exception.TriangleRepositoryException;
+import by.training.task05.service.exception.TrianglePropertyServiceException;
+import by.training.task05.service.parser.TriangleParser;
 import by.training.task05.repository.TriangleRepository;
 import by.training.task05.service.TrianglePropertyRegistrar;
 import by.training.task05.service.TrianglePropertyService;
@@ -32,17 +34,23 @@ public class TriangleServiceImpl implements TriangleService, Observable<Triangle
     }
 
     @Override
-    public Optional<Triangle> read(int id) {
-        checkId(id);
+    public Optional<Triangle> read(int id) throws TriangleServiceException {
+        if (id <= 0){
+            throw new TriangleServiceException("incorrect id");
+        }
         return triangleRepository.read(id);
     }
 
     @Override
-    public int create(Triangle.Point a, Triangle.Point b, Triangle.Point c) {
+    public int create(Triangle.Point a, Triangle.Point b, Triangle.Point c) throws TriangleServiceException {
         Triangle triangle = new Triangle(a, b, c);
         int id;
         if (triangleValidator.isTriangle(triangle)){
-             id = triangleRepository.create(triangle);
+            try {
+                id = triangleRepository.create(triangle);
+            } catch (TriangleRepositoryException e) {
+                throw new TriangleServiceException("Wrong id",e);
+            }
             notifyObserver(triangleRepository.read(id)
                     .orElseThrow(() -> new TriangleServiceException("error reading from repository")));
 
@@ -53,27 +61,37 @@ public class TriangleServiceImpl implements TriangleService, Observable<Triangle
     }
 
     @Override
-    public void createFromFile(String filename) {
+    public void createFromFile(String filename) throws TriangleServiceException {
         final List<Triangle> triangleList = TriangleParser.getInstance().parseTrianglesFromFile(filename);
         int id;
         for (Triangle triangle : triangleList) {
             if (triangleValidator.isTriangle(triangle)) {
-                id = triangleRepository.create(triangle);
+                try {
+                    id = triangleRepository.create(triangle);
+                } catch (TriangleRepositoryException e) {
+                    throw new TriangleServiceException("Wrong id",e);
+                }
                 notifyObserver(triangleRepository.read(id).orElseThrow(() -> new TriangleServiceException("error reading from repository")));
             }
         }
     }
 
     @Override
-    public void update(int id, Triangle.Point a, Triangle.Point b, Triangle.Point c) {
-        checkId(id);
+    public void update(int id, Triangle.Point a, Triangle.Point b, Triangle.Point c) throws TriangleServiceException {
+        if (id <= 0){
+            throw new TriangleServiceException("incorrect id");
+        }
         if (a == null || b == null || c == null){
             throw new TriangleServiceException("null points");
         }
         Triangle triangle = new Triangle(a, b, c);
         triangle.setId(id);
         if (triangleValidator.isTriangle(triangle)){
-            triangleRepository.update(id, triangle);
+            try {
+                triangleRepository.update(id, triangle);
+            } catch (TriangleRepositoryException e) {
+                throw new TriangleServiceException("error update",e);
+            }
             notifyObserver(triangle);
         } else {
             throw new TriangleServiceException("Not valid triangle");
@@ -81,15 +99,21 @@ public class TriangleServiceImpl implements TriangleService, Observable<Triangle
     }
 
     @Override
-    public void delete(int id) {
-        checkId(id);
+    public void delete(int id) throws TriangleServiceException {
+        if (id <= 0){
+            throw new TriangleServiceException("incorrect id");
+        }
         triangleRepository.delete(id);
         removeObserver(id);
     }
 
     @Override
-    public String getProperties(int id) {
-        return trianglePropertyService.readPropertiesById(id).toString();
+    public String getProperties(int id) throws TriangleServiceException {
+        try {
+            return trianglePropertyService.readPropertiesById(id).toString();
+        } catch (TrianglePropertyServiceException e) {
+            throw new TriangleServiceException("error setting props",e);
+        }
     }
 
     @Override
@@ -98,7 +122,7 @@ public class TriangleServiceImpl implements TriangleService, Observable<Triangle
     }
 
     @Override
-    public List<Triangle> getBySpec(Specification specification) {
+    public List<Triangle> getBySpec(Specification specification) throws TriangleServiceException {
         if (specification == null){
             throw new TriangleServiceException("Null specification");
         }
@@ -106,19 +130,16 @@ public class TriangleServiceImpl implements TriangleService, Observable<Triangle
     }
 
     @Override
-    public void notifyObserver(Triangle triangle) {
+    public void notifyObserver(Triangle triangle) throws TriangleServiceException {
        registrar.handleEvent(triangle);
     }
 
     @Override
-    public void removeObserver(int id) {
-        checkId(id);
-        registrar.removeObserver(id);
-    }
-
-    private void checkId(int id){
+    public void removeObserver(int id) throws TriangleServiceException {
         if (id <= 0){
             throw new TriangleServiceException("incorrect id");
         }
+        registrar.removeObserver(id);
     }
+
 }

@@ -9,7 +9,6 @@ public class TrianglePropertyRepositoryImpl implements Repository<TriangleProper
     private static int nextId = 1;
 
     private Map<Integer, TriangleProperty> storage = new HashMap<>();
-    private static TrianglePropertyRepositoryImpl repository;
 
     @Override
     public Optional<TriangleProperty> read(int id) {

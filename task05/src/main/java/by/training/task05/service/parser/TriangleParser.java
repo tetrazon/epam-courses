@@ -1,19 +1,16 @@
-package by.training.task05.parser;
+package by.training.task05.service.parser;
 
 import by.training.task05.entity.Triangle;
-import by.training.task05.parser.exception.TriangleParserException;
+import by.training.task05.service.parser.exception.TriangleParserException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

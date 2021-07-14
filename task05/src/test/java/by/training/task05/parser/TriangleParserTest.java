@@ -1,12 +1,10 @@
 package by.training.task05.parser;
 
 import by.training.task05.entity.Triangle;
+import by.training.task05.service.parser.TriangleParser;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.w3c.dom.Text;
 
-import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.testng.Assert.*;

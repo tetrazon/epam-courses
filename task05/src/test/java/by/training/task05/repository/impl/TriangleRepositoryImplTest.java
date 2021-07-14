@@ -67,19 +67,19 @@ public class TriangleRepositoryImplTest {
 
     @Test(description = "positive scenario of create() method",
             dataProvider = "dataForTestCreate")
-    public void testCreate(Triangle triangle) {
+    public void testCreate(Triangle triangle) throws TriangleRepositoryException {
         int id = repository.create(triangle);
         assertTrue(repository.read(id).isPresent());
     }
     @Test(description = "negative scenario of create() method",
     expectedExceptions = TriangleRepositoryException.class)
-    public void wrongTestCreate() {
+    public void wrongTestCreate() throws TriangleRepositoryException {
         int id = repository.create(null);
     }
 
     @Test(description = "positive scenario of update() method",
             dataProvider = "dataForTestUpdate")
-    public void testUpdate(Triangle initialTriangle, Triangle resultTriangle) {
+    public void testUpdate(Triangle initialTriangle, Triangle resultTriangle) throws TriangleRepositoryException {
         int id = repository.create(initialTriangle);
         repository.update(id, resultTriangle);
         assertEquals(repository.read(id).get(), resultTriangle);
@@ -88,7 +88,7 @@ public class TriangleRepositoryImplTest {
 
     @Test(description = "positive scenario of delete() method",
             dataProvider = "dataForTestDelete")
-    public void testDelete(Triangle triangle) {
+    public void testDelete(Triangle triangle) throws TriangleRepositoryException {
         int id = repository.create(triangle);
         repository.delete(id);
         assertFalse(repository.read(id).isPresent());
