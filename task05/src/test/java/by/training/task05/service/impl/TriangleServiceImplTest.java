@@ -3,6 +3,7 @@ package by.training.task05.service.impl;
 import by.training.task05.entity.Triangle;
 import by.training.task05.entity.TriangleProperty;
 import by.training.task05.repository.exception.TriangleRepositoryException;
+import by.training.task05.service.exception.TrianglePropertyServiceException;
 import by.training.task05.service.parser.TriangleParser;
 import by.training.task05.repository.Repository;
 import by.training.task05.repository.TriangleRepository;
@@ -19,6 +20,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.*;
 
@@ -134,13 +136,26 @@ public class TriangleServiceImplTest {
     }
 
     @Test(description = "positive scenario of update() method")
-    public void testUpdate() throws TriangleRepositoryException, TriangleServiceException {
+    public void testUpdate() throws TriangleRepositoryException,
+            TriangleServiceException, TrianglePropertyServiceException {
         Triangle initTriangle = getTriangle();
         final int id = triangleRepository.create(initTriangle);
         Triangle.Point newPointC = new Triangle.Point(10., 10., 10.);
         service.update(id, initTriangle.getA(), initTriangle.getB(), newPointC);
         final Triangle updatedTriangle = triangleRepository.read(id).get();
         assertEquals(updatedTriangle.getC(), newPointC);
+    }
+
+    @Test(description = "positive scenario of observer work")
+    public void testObserver() throws TriangleRepositoryException,
+            TriangleServiceException, TrianglePropertyServiceException {
+        Triangle initTriangle = getTriangle();
+        final int id = service.create(initTriangle.getA(), initTriangle.getB(), initTriangle.getC());
+        TriangleProperty trianglePropertyOld = trianglePropertyService.readPropertiesById(id);
+        Triangle.Point newPointC = new Triangle.Point(10., 10., 10.);
+        service.update(id, initTriangle.getA(), initTriangle.getB(), newPointC);
+        TriangleProperty trianglePropertyNew = trianglePropertyService.readPropertiesById(id);
+        assertFalse(trianglePropertyNew.equals(trianglePropertyOld));
     }
 
     @Test(description = "positive scenario of update() method")
