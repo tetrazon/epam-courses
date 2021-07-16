@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="error-pattern">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{5} - %msg%n
+        </Property>
+        <Property name="console-pattern">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{1} - %msg%n
+        </Property>
+        <Property name="filename">logs/log.log</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="File" fileName="${filename}" append="true"
+                     filePattern = "logs/${date:yyyy-MM-dd}/%d{yyyy-MM-dd_HH-mm}_%i.log">
+            <PatternLayout pattern="${error-pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="50 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${console-pattern}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console" level = "info"/>
+        </Root>
+
+        <Logger name="by.training.task06multithreading.service.concurrent.filler.impl.ReadWriteLockMatrixFiller" level="info" additivity="true">
+            <AppenderRef ref="File" level="error"/>
+        </Logger>
+
+        <Logger name="by.training.task06multithreading.service.concurrent.filler.impl.ReentrantMatrixFiller" level="info" additivity="true">
+            <AppenderRef ref="File" level="error"/>
+        </Logger>
+
+        <Logger name="by.training.task06multithreading.service.concurrent.filler.impl.SemaphoreMatrixFiller" level="info" additivity="true">
+            <AppenderRef ref="File" level="error"/>
+        </Logger>
+
+        <Logger name="by.training.task06multithreading.main.Runner" level="info" additivity="true">
+            <AppenderRef ref="File" level="error"/>
+        </Logger>
+
+
+    </Loggers>
+</Configuration>
