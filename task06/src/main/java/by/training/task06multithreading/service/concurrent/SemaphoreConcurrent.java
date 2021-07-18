@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 
+import java.util.IllegalFormatCodePointException;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
@@ -33,10 +34,13 @@ public class SemaphoreConcurrent implements Runnable {
     public void run() {
         int limit = commonResource.getMatrix().getHorizontalSize();
         while (true){
+            boolean acquired = false;
             try {
                 semaphore.acquire();
+                acquired = true;
                 if (commonResource.getCounter() == limit) {
                     semaphore.release();
+                    acquired = false;
                     return;
                 }
                 for (int i = 0; i < limit; i++) {
@@ -47,6 +51,7 @@ public class SemaphoreConcurrent implements Runnable {
                                     + " setting the value matrix[" + i + "][" + i + "]");
                             commonResource.setCounter(commonResource.getCounter() + 1);
                             semaphore.release();
+                            acquired = false;
                             TimeUnit.MILLISECONDS.sleep(1);
                             break;
                         }
@@ -56,6 +61,10 @@ public class SemaphoreConcurrent implements Runnable {
                 }
             } catch (InterruptedException e) {
                 throw new ConcurrentException("Thread has been interrupted", e);
+            } finally {
+                if (acquired){
+                    semaphore.release();
+                }
             }
         }
     }

@@ -34,33 +34,41 @@ public class ReadWriteLockConcurrent implements Runnable {
         log.info("thread #" + (int) Thread.currentThread().getId() + " started");
         int limit = commonResource.getMatrix().getHorizontalSize();
         while (true){
-            if (!locker.isWriteLocked()){
-                final ReentrantReadWriteLock.WriteLock writeLock = locker.writeLock();
-                writeLock.lock();
-                if (commonResource.getCounter() == limit) {
-                    writeLock.unlock();
-                    return;
-                }
-                for (int i = 0; i < limit; i++) {
-                    try {
-                        if (commonResource.getMatrix().getElement(i, i) == 0) {
-                            commonResource.getMatrix().setElement(i, i, (int) Thread.currentThread().getId());
-                            log.info("thread #" + Thread.currentThread().getId()
-                                    + " setting the value matrix[" + i + "][" + i + "]");
-                            commonResource.setCounter(commonResource.getCounter() + 1);
-                            break;
+            final ReentrantReadWriteLock.WriteLock writeLock = locker.writeLock();
+            try{
+                if (!locker.isWriteLocked()){
+
+                    writeLock.lock();
+                    if (commonResource.getCounter() == limit) {
+                        writeLock.unlock();
+                        return;
+                    }
+                    for (int i = 0; i < limit; i++) {
+                        try {
+                            if (commonResource.getMatrix().getElement(i, i) == 0) {
+                                commonResource.getMatrix().setElement(i, i, (int) Thread.currentThread().getId());
+                                log.info("thread #" + Thread.currentThread().getId()
+                                        + " setting the value matrix[" + i + "][" + i + "]");
+                                commonResource.setCounter(commonResource.getCounter() + 1);
+                                break;
+                            }
+                        } catch (MatrixException e) {
+                            throw new ConcurrentException("matrix operation error", e);
                         }
-                    } catch (MatrixException e) {
-                        throw new ConcurrentException("matrix operation error", e);
+                    }
+                    writeLock.unlock();
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        throw new ConcurrentException("Thread has been interrupted", e);
                     }
                 }
-                writeLock.unlock();
-                try {
-                    TimeUnit.MILLISECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    throw new ConcurrentException("Thread has been interrupted", e);
+            } finally {
+                if (writeLock.isHeldByCurrentThread()){
+                    writeLock.unlock();
                 }
             }
+
         }
     }
 }

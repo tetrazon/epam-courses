@@ -32,25 +32,32 @@ public class ReentrantConcurrent implements Runnable {
     public void run() {
         int limit = commonResource.getMatrix().getHorizontalSize();
         while (true){
-            if (locker.tryLock()){
-                if (commonResource.getCounter() == limit) {
-                    locker.unlock();
-                    return;
-                }
-                for (int i = 0; i < limit; i++) {
-                    try {
-                        if (commonResource.getMatrix().getElement(i, i) == 0) {
-                            commonResource.getMatrix().setElement(i, i, (int) Thread.currentThread().getId());
-                            log.info("thread #" + Thread.currentThread().getId()
-                                    + " setting the value matrix[" + i + "][" + i + "]");
-                            commonResource.setCounter(commonResource.getCounter() + 1);
-                            break;
-                        }
-                    } catch (MatrixException e) {
-                        throw new ConcurrentException("matrix operation error", e);
+            try{
+                if (locker.tryLock()){
+                    if (commonResource.getCounter() == limit) {
+                        locker.unlock();
+                        return;
                     }
+                    for (int i = 0; i < limit; i++) {
+                        try {
+                            if (commonResource.getMatrix().getElement(i, i) == 0) {
+                                commonResource.getMatrix().setElement(i, i, (int) Thread.currentThread().getId());
+                                log.info("thread #" + Thread.currentThread().getId()
+                                        + " setting the value matrix[" + i + "][" + i + "]");
+                                commonResource.setCounter(commonResource.getCounter() + 1);
+                                break;
+                            }
+                        } catch (MatrixException e) {
+                            throw new ConcurrentException("matrix operation error", e);
+                        }
+                    }
+                    locker.unlock();
                 }
-                locker.unlock();
+            } finally {
+                if (locker.isHeldByCurrentThread())
+                {
+                    locker.unlock();
+                }
             }
         }
     }
