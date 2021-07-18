@@ -2,7 +2,6 @@ package by.training.task06multithreading.service.concurrent.filler.impl;
 
 import by.training.task06multithreading.entity.Matrix;
 import by.training.task06multithreading.entity.exception.MatrixException;
-import by.training.task06multithreading.service.concurrent.ReadWriteLockConcurrent;
 import by.training.task06multithreading.service.concurrent.filler.Filler;
 import by.training.task06multithreading.service.concurrent.filler.exception.FillerException;
 import lombok.extern.log4j.Log4j2;
@@ -14,8 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 @Log4j2
 public class ConcurrentHashMapSolution implements Filler<Matrix> {
-    private Matrix matrix;
-    private ConcurrentHashMap<String, Integer> concurrentHashMap = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, Integer> concurrentHashMap = new ConcurrentHashMap<>();
 
     @Override
     public Matrix fill(Matrix matrix) throws FillerException {
@@ -28,9 +26,8 @@ public class ConcurrentHashMapSolution implements Filler<Matrix> {
             threadList.add(new Thread(() -> {
                 log.info("thread #" + (int) Thread.currentThread().getId() + " started");
                 for (int j = 0; j < matrixSize; j++) {
-                    if (!concurrentHashMap.containsKey(j)) {
-                            //matrix.setElement(j, j, (int) Thread.currentThread().getId());
-                        concurrentHashMap.put("" + j + j, (int) Thread.currentThread().getId());
+                    if (concurrentHashMap.get(j) == null) {
+                        concurrentHashMap.put(j, (int) Thread.currentThread().getId());
                             log.info("thread #" + Thread.currentThread().getId()
                                     + " setting the value matrix[" + j + "][" + j + "]");
                     }
@@ -50,7 +47,7 @@ public class ConcurrentHashMapSolution implements Filler<Matrix> {
 
         for (int i = 0; i < matrixSize; i++) {
             try {
-                matrix.setElement(i, i, concurrentHashMap.get("" + i + i));
+                matrix.setElement(i, i, concurrentHashMap.get(i));
             } catch (MatrixException e) {
                 throw new FillerException("Matrix operation error", e);
             }
