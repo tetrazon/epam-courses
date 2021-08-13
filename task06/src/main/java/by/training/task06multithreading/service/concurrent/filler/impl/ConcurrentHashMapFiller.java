@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 @Log4j2
-public class ConcurrentHashMapSolution implements Filler<Matrix> {
+public class ConcurrentHashMapFiller implements Filler<Matrix> {
     private ConcurrentHashMap<Integer, Integer> concurrentHashMap = new ConcurrentHashMap<>();
 
     @Override
@@ -37,6 +37,7 @@ public class ConcurrentHashMapSolution implements Filler<Matrix> {
 
         threadList.forEach(Thread::start);
 
+        //wait for matrix filling
         while (concurrentHashMap.size() != matrixSize){
             try {
                 TimeUnit.MILLISECONDS.sleep(10);
@@ -53,7 +54,6 @@ public class ConcurrentHashMapSolution implements Filler<Matrix> {
             }
         }
 
-        log.info("filled matrix:\n" + matrix);
         return matrix;
     }
 }
