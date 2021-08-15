@@ -8,11 +8,8 @@ public class WordParser implements Handler {
 
     @Override
     public void handleRequest(Component component, String string) {
-        System.out.println(" word to ch: " + string);
-
         char[] chars = string.trim().toCharArray();
         for (char ch : chars) {
-            System.out.println("char:\n" + ch);
             Component newComponent = new Symbol(ch);
             component.add(newComponent);
         }

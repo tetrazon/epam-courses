@@ -23,7 +23,6 @@ public class SentenceParser implements Handler {
     public void handleRequest(Component component, String string) {
         List<String> lexemeList = Arrays.asList(string.trim().split(DELIMITER));
         for (String str : lexemeList) {
-            System.out.println("lexeme:\n" + str);
             Component newComponent = new Composite(type);
             component.add(newComponent);
             nextHandler.handleRequest(newComponent, str);

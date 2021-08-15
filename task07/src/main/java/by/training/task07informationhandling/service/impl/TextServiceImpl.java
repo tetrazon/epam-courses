@@ -7,18 +7,15 @@ import by.training.task07informationhandling.service.TextService;
 import by.training.task07informationhandling.service.exception.TextServiceException;
 import by.training.task07informationhandling.service.parser.impl.*;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class TextServiceImpl implements TextService {
     @Override
@@ -29,10 +26,7 @@ public class TextServiceImpl implements TextService {
         ParagraphParser paragraphParser = new ParagraphParser(sentenceParser, TypeManager.SENTENCE);
         TextParser textParser = new TextParser(paragraphParser, TypeManager.PARAGRAPH);
         Composite composite = new Composite(TypeManager.TEXT);
-
         textParser.handleRequest(composite, text);
-        final String collect = composite.collect();
-        System.out.println(collect);
         return composite;
     }
 
@@ -53,7 +47,7 @@ public class TextServiceImpl implements TextService {
     }
 
     @Override
-    public void sortLexemes(Composite composite, char symbolToCount) {
+    public String sortLexemes(Composite composite, char symbolToCount) {
         List<String> lexemes = new ArrayList<>();
         final List<Component> paragraphs = composite.getChildList();
         for (int i = 0; i < paragraphs.size(); i++) {
@@ -74,7 +68,7 @@ public class TextServiceImpl implements TextService {
             return res;
         };
         lexemes.sort(compareBySymbolCountThenAlphaBet);
-        System.out.println(lexemes.stream().reduce("", (a, b) -> a + " " + b));
+        return lexemes.stream().reduce("", (a, b) -> a + " " + b);
 
     }
 
@@ -86,14 +80,20 @@ public class TextServiceImpl implements TextService {
 
         ClassLoader classLoader = getClass().getClassLoader();
         URL resource = classLoader.getResource(fileName);
+        if (resource == null){
+            throw new TextServiceException("File does not exist.");
+        }
         String textFromFile = "";
         try {
             byte[] fileBytes = Files.readAllBytes(Path.of(resource.toURI()));
             textFromFile = new String(fileBytes);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new TextServiceException("Error reading file. ", e);
         } catch (URISyntaxException e) {
-            e.printStackTrace();
+            throw new TextServiceException("File name error. ", e);
+        }
+        if (textFromFile.isEmpty() || textFromFile.length() < 3){
+            throw new TextServiceException("Error text string in the file. ");
         }
 
         return textFromFile;
@@ -107,13 +107,13 @@ public class TextServiceImpl implements TextService {
                 "    Tytyty tyt tyt: tutu? Nono non n.";
         String text2 = "\tIt has survived - not only (five) centuries, but also the leap into 13<<2 electronic typesetting, remaining 30>>>3 essentially ~6&9|(3&4) unchanged." +
                 " It was popularised in the 5|(1&2&(3|(4&(25^5|6&47)|3)|2)|1) with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." +
-                "\n" +
+                "\r" +
                 "\tIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using (~71&(2&3|(3|(2&1>>2|2)&2)|10&2))|78 Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using (Content here), content here', making it look like readable English." +
-                "\n\tIt is a (8^5|1&2<<(2|5>>2&71))|1200 established fact that a reader will be of a page when looking at its layout?!" +
-                "\n\tBye...\n";
-        String text3 = "\n\tBye bob. See you.\n" + "\n\tBye bob. See you.\n";
+                "\r\tIt is a (8^5|1&2<<(2|5>>2&71))|1200 established fact that a reader will be of a page when looking at its layout?!" +
+                "\r\tBye...\r";
+        String text3 = "\tBye bob. See you.\r" + "\tBye bob. See you.\r";
         String text4 = textService.readFromFile("data/text.txt");
-        Composite composite = textService.parseText(text4);
+        Composite composite = textService.parseText(text2);
         //textService.sortBySentenceNumber(composite);
         //textService.sortByWordLengthInSentence(composite);
         textService.sortLexemes(composite, 'a');

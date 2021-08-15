@@ -24,12 +24,7 @@ public class Symbol implements Component {
 
     @Override
     public List<Component> getChildList() {
-        return null;
-    }
-
-    @Override
-    public void operation() {
-
+        throw new UnsupportedOperationException("Cannot call getChildList in Symbol.class");
     }
 
     @Override

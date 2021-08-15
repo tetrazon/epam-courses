@@ -6,7 +6,6 @@ public interface Component {
     void add(Component component);
     Component getChild(int index);
     List<Component> getChildList();
-    void operation();
     void remove(int index);
     String collect();
 }

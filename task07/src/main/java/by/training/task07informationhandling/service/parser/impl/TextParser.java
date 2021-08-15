@@ -26,7 +26,6 @@ public class TextParser implements Handler {
         Matcher matcher = pattern.matcher(string);
         while (matcher.find()) {
             String str = matcher.group();
-            System.out.println("par:\n" + str);
             Component newComponent = new Composite(type);
             component.add(newComponent);
             nextHandler.handleRequest(newComponent, str.trim());

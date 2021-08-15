@@ -36,7 +36,6 @@ public class LexemeParser implements Handler {
         wordsList.add(punct);
 
         for (String s : wordsList) {
-            System.out.println("Word:\n" + s);
             Component newComponent = new Composite(type);
             component.add(newComponent);
             nextHandler.handleRequest(newComponent, s);

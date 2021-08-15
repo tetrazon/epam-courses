@@ -7,6 +7,6 @@ public interface TextService {
     Composite parseText(String text);
     void sortBySentenceNumber(Composite composite);
     void sortByWordLengthInSentence(Composite composite);
-    void sortLexemes(Composite composite, char symbolToCount);
+    String sortLexemes(Composite composite, char symbolToCount);
     String readFromFile(String filename) throws TextServiceException;
 }

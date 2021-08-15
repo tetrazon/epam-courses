@@ -24,15 +24,11 @@ public class ParagraphParser implements Handler {
     public void handleRequest(Component component, String string) {
         Pattern pattern = Pattern.compile(DELIMITER);
         Matcher matcher = pattern.matcher(string);
-        int count = 0;
         while (matcher.find()) {
              String str = matcher.group();
-             count++;
-            System.out.println("sentence:\n" + str);
             Component newComponent = new Composite(type);
             component.add(newComponent);
             nextHandler.handleRequest(newComponent, str.trim());
         }
-        System.out.println("#setnences: " + count);
     }
 }

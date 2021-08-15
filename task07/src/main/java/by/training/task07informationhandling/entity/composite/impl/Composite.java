@@ -38,11 +38,6 @@ public class Composite implements Component {
     }
 
     @Override
-    public void operation() {
-
-    }
-
-    @Override
     public void remove(int index) {
         componentList.remove(index);
     }
