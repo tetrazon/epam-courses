@@ -27,6 +27,7 @@ public class ReentrantMatrixFiller implements Filler<Matrix> {
 
         threadList.forEach(Thread::start);
 
+        //wait for matrix filling
         while (commonResource.getCounter()!= commonResource.getMatrix().getHorizontalSize()){
             try {
                 TimeUnit.MILLISECONDS.sleep(10);
@@ -35,7 +36,7 @@ public class ReentrantMatrixFiller implements Filler<Matrix> {
             }
 
         }
-        log.info("filled matrix:\n" + matrix);
+
         return matrix;
         }
 }

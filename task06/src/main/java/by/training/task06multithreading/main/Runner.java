@@ -4,7 +4,7 @@ import by.training.task06multithreading.entity.Matrix;
 import by.training.task06multithreading.service.MatrixService;
 import by.training.task06multithreading.service.concurrent.filler.Filler;
 import by.training.task06multithreading.service.concurrent.filler.exception.FillerException;
-import by.training.task06multithreading.service.concurrent.filler.impl.ConcurrentHashMapSolution;
+import by.training.task06multithreading.service.concurrent.filler.impl.ConcurrentHashMapFiller;
 import by.training.task06multithreading.service.concurrent.filler.impl.ReadWriteLockMatrixFiller;
 import by.training.task06multithreading.service.concurrent.filler.impl.ReentrantMatrixFiller;
 import by.training.task06multithreading.service.concurrent.filler.impl.SemaphoreMatrixFiller;
@@ -31,12 +31,15 @@ public class Runner {
         fillerList.add(new ReadWriteLockMatrixFiller());
         fillerList.add(new ReentrantMatrixFiller());
         fillerList.add(new SemaphoreMatrixFiller());
-        fillerList.add(new ConcurrentHashMapSolution());
+        fillerList.add(new ConcurrentHashMapFiller());
 
         for (Filler<Matrix> matrixFiller : fillerList) {
             try {
+                log.info("initial matrix:\n" + matrix);
                 matrixService.setZerosInDiagonal(matrix);
-                matrixFiller.fill(matrix);
+                log.info("zero diagonal matrix:\n" + matrix);
+                matrix = matrixFiller.fill(matrix);
+                log.info("filled matrix:\n" + matrix);
             } catch (MatrixServiceException e) {
                 log.error("service matrix exception", e);
             } catch (FillerException e) {
