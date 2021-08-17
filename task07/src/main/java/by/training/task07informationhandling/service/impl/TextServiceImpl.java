@@ -6,6 +6,7 @@ import by.training.task07informationhandling.manager.TypeManager;
 import by.training.task07informationhandling.service.TextService;
 import by.training.task07informationhandling.service.exception.TextServiceException;
 import by.training.task07informationhandling.service.parser.impl.*;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Log4j2
 public class TextServiceImpl implements TextService {
     @Override
     public Composite parseText(String text) {
@@ -27,6 +28,7 @@ public class TextServiceImpl implements TextService {
         TextParser textParser = new TextParser(paragraphParser, TypeManager.PARAGRAPH);
         Composite composite = new Composite(TypeManager.TEXT);
         textParser.handleRequest(composite, text);
+        log.info("parsed text:\n" + composite.collect());
         return composite;
     }
 
@@ -97,28 +99,5 @@ public class TextServiceImpl implements TextService {
         }
 
         return textFromFile;
-    }
-
-
-    public static void main(String[] args) throws TextServiceException {
-        TextService textService = new TextServiceImpl();
-        String text = "    Ololo lolo lo. Wowowo wow www.\n" +
-                "    Lalala llala alala... Qeqeqe qeq, qeqe?! Popopo po popo, popo!\n\r" +
-                "    Tytyty tyt tyt: tutu? Nono non n.";
-        String text2 = "\tIt has survived - not only (five) centuries, but also the leap into 13<<2 electronic typesetting, remaining 30>>>3 essentially ~6&9|(3&4) unchanged." +
-                " It was popularised in the 5|(1&2&(3|(4&(25^5|6&47)|3)|2)|1) with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." +
-                "\r" +
-                "\tIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using (~71&(2&3|(3|(2&1>>2|2)&2)|10&2))|78 Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using (Content here), content here', making it look like readable English." +
-                "\r\tIt is a (8^5|1&2<<(2|5>>2&71))|1200 established fact that a reader will be of a page when looking at its layout?!" +
-                "\r\tBye...\r";
-        String text3 = "\tBye bob. See you.\r" + "\tBye bob. See you.\r";
-        String text4 = textService.readFromFile("data/text.txt");
-        Composite composite = textService.parseText(text2);
-        //textService.sortBySentenceNumber(composite);
-        //textService.sortByWordLengthInSentence(composite);
-        textService.sortLexemes(composite, 'a');
-        //System.out.println("=========");
-        //final String collect = composite.collect();
-        //System.out.println(collect);
     }
 }

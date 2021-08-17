@@ -16,11 +16,4 @@ public enum TypeManager {
     public String getFormat() {
         return format;
     }
-
-    public static void main(String[] args) {
-        System.out.println(String.format(WORD.getFormat(), "ololo"));
-        System.out.println(String.format(LEXEME.getFormat(), "ololo"));
-        System.out.println(String.format(SENTENCE.getFormat(), "ololo"));
-        System.out.println(String.format(PARAGRAPH.getFormat(), "ololo"));
-    }
 }

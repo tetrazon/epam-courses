@@ -14,17 +14,17 @@ public class Symbol implements Component {
 
     @Override
     public void add(Component component) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Cannot call add() in Symbol.class");
     }
 
     @Override
     public Component getChild(int index) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Cannot call getChild() in Symbol.class");
     }
 
     @Override
     public List<Component> getChildList() {
-        throw new UnsupportedOperationException("Cannot call getChildList in Symbol.class");
+        throw new UnsupportedOperationException("Cannot call getChildList() in Symbol.class");
     }
 
     @Override
