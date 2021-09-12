@@ -1,0 +1,73 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.training.by/task08/flowers"
+        xmlns:tns="http://www.training.by/task08/flowers"
+        elementFormDefault="qualified">
+    <element name="flowers">
+        <complexType>
+            <sequence>
+                <element name="flower" type="tns:Flower"
+                         minOccurs="2"
+                         maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="visualParams" type="tns:VisualParams"/>
+    <element name="growingTips" type="tns:GrowingTips"/>
+
+    <complexType name="VisualParams">
+        <sequence>
+            <element name="stColor" type="string"/>
+            <element name="lfColor" type="string"/>
+            <element name="avSize" type="positiveInteger"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="GrowingTips">
+        <sequence>
+            <element name="temperature" type="double"/>
+            <element name="light" type="boolean"/>
+            <element name="water" type="double"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Flower">
+        <sequence>
+            <element name="name" type="string"/>
+            <element name="soil">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="podzolic"/>
+                        <enumeration value="ground"/>
+                        <enumeration value="sod-podzolic"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="origin" type="string"/>
+            <element name="visualParams" type="tns:VisualParams"/>
+            <element name="growingTips" type="tns:GrowingTips"/>
+            <element name="multiplying">
+                <simpleType>
+                <restriction base="string">
+                    <enumeration value="leaf"/>
+                    <enumeration value="stalk"/>
+                    <enumeration value="seed"/>
+                </restriction>
+                </simpleType>
+            </element>
+            <element name="growDate" type="date"/>
+        </sequence>
+        <attribute name="itemName" type="tns:ItemName" use="required"/>
+        <attribute name="isPoisoning" type="boolean" default="false"/>
+    </complexType>
+
+    <simpleType name="ItemName">
+        <restriction base="ID">
+            <pattern value="[a-zA-Z]{2,19}\-[a-z0-9]{3}"/>
+        </restriction>
+    </simpleType>
+
+
+
+</schema>
+

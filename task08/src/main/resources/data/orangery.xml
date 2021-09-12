@@ -1,0 +1,243 @@
+<?xml version ="1.0" encoding = "UTF-8"?>
+<flowers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://www.training.by/task08/flowers"
+         xsi:schemaLocation="http://www.training.by/task08/flowers  orangery.xsd">
+    <flower itemName="agava-001" isPoisoning="false">
+        <name>Agava</name>
+        <soil>podzolic</soil>
+        <origin>Mexico</origin>
+        <visualParams>
+            <stColor>green</stColor>
+            <lfColor>green</lfColor>
+            <avSize>1</avSize>
+        </visualParams>
+        <growingTips>
+            <temperature>25</temperature>
+            <light>true</light>
+            <water>200</water>
+        </growingTips>
+        <multiplying>leaf</multiplying>
+        <growDate>2020-11-11</growDate>
+    </flower>
+    <flower itemName="aloe-002" >
+        <name>Aloe</name>
+        <soil>ground</soil>
+        <origin>South Africa</origin>
+        <visualParams>
+            <stColor>green</stColor>
+            <lfColor>green</lfColor>
+            <avSize>2</avSize>
+        </visualParams>
+        <growingTips>
+            <temperature>25</temperature>
+            <light>true</light>
+            <water>250</water>
+        </growingTips>
+        <multiplying>stalk</multiplying>
+        <growDate>2020-11-11</growDate>
+    </flower>
+    <flower itemName="ananas-001">
+        <name>Ananas</name>
+        <soil>sod-podzolic</soil>
+        <origin>Argentina</origin>
+        <visualParams>
+            <stColor>yellow</stColor>
+            <lfColor>green</lfColor>
+            <avSize>2</avSize>
+        </visualParams>
+        <growingTips>
+            <temperature>25</temperature>
+            <light>true</light>
+            <water>300</water>
+        </growingTips>
+        <multiplying>leaf</multiplying>
+        <growDate>2020-10-10</growDate>
+    </flower>
+    <flower itemName="begonia-001">
+        <name>Begonia</name>
+        <soil>podzolic</soil>
+        <origin>Central Africa</origin>
+        <visualParams>
+            <stColor>dark green</stColor>
+            <lfColor>green</lfColor>
+            <avSize>1</avSize>
+        </visualParams>
+        <growingTips>
+            <temperature>25</temperature>
+            <light>true</light>
+            <water>150</water>
+        </growingTips>
+        <multiplying>stalk</multiplying>
+        <growDate>2019-10-10</growDate>
+    </flower>
+    <flower itemName="haemanthus-001">
+        <name>Haemanthus</name>
+        <soil>sod-podzolic</soil>
+        <origin>South Africa</origin>
+        <visualParams>
+            <stColor>light green</stColor>
+            <lfColor>light green</lfColor>
+            <avSize>1</avSize>
+        </visualParams>
+        <growingTips>
+            <temperature>25</temperature>
+            <light>true</light>
+            <water>300</water>
+        </growingTips>
+        <multiplying>stalk</multiplying>
+        <growDate>2019-10-10</growDate>
+    </flower>
+    <flower itemName="hibiscus-001">
+        <name>Hibiscus</name>
+        <soil>ground</soil>
+        <origin>East Asia</origin>
+        <visualParams>
+            <stColor>red</stColor>
+            <lfColor>green</lfColor>
+            <avSize>1</avSize>
+        </visualParams>
+        <growingTips>
+            <temperature>25</temperature>
+            <light>false</light>
+            <water>300</water>
+        </growingTips>
+        <multiplying>stalk</multiplying>
+        <growDate>2019-05-10</growDate>
+    </flower>
+    <flower itemName="eupatorium-001">
+        <name>Eupatorium</name>
+        <soil>podzolic</soil>
+        <origin>Mexico</origin>
+        <visualParams>
+            <stColor>light green</stColor>
+            <lfColor>green</lfColor>
+            <avSize>2</avSize>
+        </visualParams>
+        <growingTips>
+            <temperature>20</temperature>
+            <light>false</light>
+            <water>350</water>
+        </growingTips>
+        <multiplying>stalk</multiplying>
+        <growDate>2019-10-15</growDate>
+    </flower>
+    <flower itemName="jasminum-001">
+        <name>Jasminum</name>
+        <soil>sod-podzolic</soil>
+        <origin>India</origin>
+        <visualParams>
+            <stColor>brown</stColor>
+            <lfColor>white</lfColor>
+            <avSize>2</avSize>
+        </visualParams>
+        <growingTips>
+            <temperature>20</temperature>
+            <light>false</light>
+            <water>350</water>
+        </growingTips>
+        <multiplying>stalk</multiplying>
+        <growDate>2019-01-10</growDate>
+    </flower>
+    <flower itemName="zantedeschia-001">
+        <name>Zantedeschia</name>
+        <soil>podzolic</soil>
+        <origin>South Africa</origin>
+        <visualParams>
+            <stColor>dark green</stColor>
+            <lfColor>white</lfColor>
+            <avSize>1</avSize>
+        </visualParams>
+        <growingTips>
+            <temperature>25</temperature>
+            <light>false</light>
+            <water>150</water>
+        </growingTips>
+        <multiplying>stalk</multiplying>
+        <growDate>2019-10-05</growDate>
+    </flower>
+    <flower itemName="cardamomum-001">
+        <name>Cardamomum</name>
+        <soil>ground</soil>
+        <origin>India</origin>
+        <visualParams>
+            <stColor>dark green</stColor>
+            <lfColor>light green</lfColor>
+            <avSize>3</avSize>
+        </visualParams>
+        <growingTips>
+            <temperature>20</temperature>
+            <light>false</light>
+            <water>600</water>
+        </growingTips>
+        <multiplying>stalk</multiplying>
+        <growDate>2014-10-10</growDate>
+    </flower>
+    <flower itemName="cordyline-001">
+        <name>Cordyline</name>
+        <soil>podzolic</soil>
+        <origin>Malasya</origin>
+        <visualParams>
+            <stColor>dark green</stColor>
+            <lfColor>violet</lfColor>
+            <avSize>1</avSize>
+        </visualParams>
+        <growingTips>
+            <temperature>20</temperature>
+            <light>false</light>
+            <water>150</water>
+        </growingTips>
+        <multiplying>stalk</multiplying>
+        <growDate>2019-03-10</growDate>
+    </flower>
+    <flower itemName="laurus-001">
+        <name>Laurus</name>
+        <soil>ground</soil>
+        <origin>Mediterranean</origin>
+        <visualParams>
+            <stColor>brown</stColor>
+            <lfColor>light green</lfColor>
+            <avSize>3</avSize>
+        </visualParams>
+        <growingTips>
+            <temperature>20</temperature>
+            <light>false</light>
+            <water>600</water>
+        </growingTips>
+        <multiplying>stalk</multiplying>
+        <growDate>2019-10-10</growDate>
+    </flower>
+    <flower itemName="citrus-001">
+        <name>Citrus</name>
+        <soil>ground</soil>
+        <origin>Asia</origin>
+        <visualParams>
+            <stColor>light green</stColor>
+            <lfColor>yellow</lfColor>
+            <avSize>2</avSize>
+        </visualParams>
+        <growingTips>
+            <temperature>25</temperature>
+            <light>false</light>
+            <water>600</water>
+        </growingTips>
+        <multiplying>seed</multiplying>
+        <growDate>2019-10-10</growDate>
+    </flower>
+    <flower itemName="lutic-001" isPoisoning="true">
+        <name>Lutic</name>
+        <soil>ground</soil>
+        <origin>Europe</origin>
+        <visualParams>
+            <stColor>light green</stColor>
+            <lfColor>yellow</lfColor>
+            <avSize>1</avSize>
+        </visualParams>
+        <growingTips>
+            <temperature>15</temperature>
+            <light>false</light>
+            <water>50</water>
+        </growingTips>
+        <multiplying>stalk</multiplying>
+        <growDate>2019-10-10</growDate>
+    </flower>
+</flowers>
