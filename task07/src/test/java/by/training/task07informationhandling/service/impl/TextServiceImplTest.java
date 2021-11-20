@@ -1,12 +1,10 @@
 package by.training.task07informationhandling.service.impl;
 
 import by.training.task07informationhandling.entity.composite.impl.Composite;
-import by.training.task07informationhandling.manager.TypeManager;
 import by.training.task07informationhandling.service.TextService;
 import by.training.task07informationhandling.service.exception.TextServiceException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;

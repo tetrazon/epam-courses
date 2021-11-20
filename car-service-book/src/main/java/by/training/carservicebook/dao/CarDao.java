@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CarDao extends Dao<Car>{
     List<Car> getCarByUserId(Integer id) throws DaoException;
-    int deleteCarByUserId(Integer id);
+    int deleteCarByUserId(Integer id) throws DaoException;
 }

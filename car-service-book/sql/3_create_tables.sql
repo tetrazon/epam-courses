@@ -62,7 +62,7 @@ CREATE TABLE car (
                      id INTEGER NOT NULL AUTO_INCREMENT,
                      `user_id` INTEGER NOT NULL ,
                      `model` VARCHAR(30) NOT NULL,
-                     `mileage` INTEGER NOT NULL,
+                     `mileage` double NOT NULL,
                      `year` INTEGER NOT NULL,
                      CONSTRAINT car_pk PRIMARY KEY (`id`),
                      CONSTRAINT fk_car_user FOREIGN KEY (`user_id`)

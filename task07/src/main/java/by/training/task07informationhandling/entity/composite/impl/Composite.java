@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Composite implements Component {
+    //TODO equals hashcode
 
     private TypeManager type;
     private List<Component> componentList = new LinkedList<>();

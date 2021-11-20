@@ -10,4 +10,4 @@ TO car_service_app@localhost;
 GRANT SELECT,INSERT,UPDATE,DELETE
 ON `car_service_db`.*
 TO car_service_app@'%';
-#IDENTIFIED BY 'library_password';
+#IDENTIFIED BY 'password';

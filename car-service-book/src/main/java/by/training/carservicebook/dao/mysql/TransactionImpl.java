@@ -14,11 +14,9 @@ public class TransactionImpl implements Transaction {
 
 	private static Map<Class<? extends Dao<?>>, Class<? extends BaseDao>> classes = new ConcurrentHashMap<>();
 	static {
-		/*classes.put(AuthorDao.class, AuthorDaoImpl.class);
-		classes.put(BookDao.class, BookDaoImpl.class);
 		classes.put(UserDao.class, UserDaoImpl.class);
-		classes.put(ReaderDao.class, ReaderDaoImpl.class);
-		classes.put(UsageDao.class, UsageDaoImpl.class);*/
+		classes.put(CarDao.class, CarDaoImpl.class);
+		classes.put(CarRecordDao.class, CarRecordDaoImpl.class);
 	}
 
 	private Connection connection;

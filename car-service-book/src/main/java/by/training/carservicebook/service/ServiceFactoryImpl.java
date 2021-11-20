@@ -20,6 +20,8 @@ public class ServiceFactoryImpl implements ServiceFactory {
 
 	static {
 		SERVICES.put(UserService.class, UserServiceImpl.class);
+		SERVICES.put(CarService.class, CarServiceImpl.class);
+		SERVICES.put(CarRecordService.class, CarRecordServiceImpl.class);
 	}
 
 	private TransactionFactory factory;
@@ -30,7 +32,7 @@ public class ServiceFactoryImpl implements ServiceFactory {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public <Type extends Service> Type getService(Class<Type> key) throws ServiceException {
+	public <T extends Service> T getService(Class<T> key) throws ServiceException {
 		Class<? extends ServiceImpl> value = SERVICES.get(key);
 		if(value != null) {
 			try {
@@ -40,7 +42,7 @@ public class ServiceFactoryImpl implements ServiceFactory {
 				ServiceImpl service = value.newInstance();
 				service.setTransaction(transaction);
 				InvocationHandler handler = new ServiceInvocationHandlerImpl(service);
-				return (Type)Proxy.newProxyInstance(classLoader, interfaces, handler);
+				return (T)Proxy.newProxyInstance(classLoader, interfaces, handler);
 			} catch(DaoException e) {
 				throw new ServiceException(e);
 			} catch(InstantiationException | IllegalAccessException e) {

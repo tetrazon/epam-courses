@@ -41,7 +41,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 		UserDao dao = null;
 		try {
 			dao = transaction.createDao(UserDao.class);
-			return dao.read(login, password);
+			return dao.findByLoginAndPassword(login, password);
 		} catch (DaoException e) {
 			log.error("Dao exception");
 			throw new ServiceException(e);
@@ -69,11 +69,11 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 	}
 
 	@Override
-	public void delete(Integer id) throws ServiceException {
+	public boolean delete(Integer id) throws ServiceException {
 		UserDao dao = null;
 		try {
 			dao = transaction.createDao(UserDao.class);
-			dao.delete(id);
+			return dao.delete(id);
 		} catch (DaoException e) {
 			log.error("Dao exception");
 			throw new ServiceException(e);

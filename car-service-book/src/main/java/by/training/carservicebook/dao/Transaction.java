@@ -4,7 +4,7 @@ package by.training.carservicebook.dao;
 import by.training.carservicebook.dao.exception.DaoException;
 
 public interface Transaction {
-	<Type extends Dao<?>> Type createDao(Class<Type> key) throws DaoException;
+	<T extends Dao<?>> T createDao(Class<T> key) throws DaoException;
 
 	void commit() throws DaoException;
 

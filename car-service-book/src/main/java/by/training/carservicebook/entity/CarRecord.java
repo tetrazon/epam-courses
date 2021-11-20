@@ -6,15 +6,14 @@ import java.sql.Date;
 
 @Data
 public class CarRecord extends Entity {
-    //private Integer id;
     private Car car;
     private String category;
     private Date recordDate;
     private int monthInterval;
-    private long kmInterval;
-    boolean isPeriodicOperation;
+    private int kmInterval;
+    Boolean isPeriodic;
     private String description;
     private Master master;
     double workPrice;
-    boolean isOnTender;
+    Boolean isTender;
 }

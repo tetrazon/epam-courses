@@ -25,6 +25,10 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             "SELECT user.id, user.name, surname, email, d.name district, mobile_phone FROM user " +
                     "join district d on d.id = user.district_id " +
                     "WHERE user.id=?";
+    private static final String SQL_SELECT_USER_BY_LOGIN_AND_PASSWORD =
+            "SELECT user.id, user.name, surname, email, role, d.name district, mobile_phone FROM user " +
+                    "join district d on d.id = user.district_id " +
+                    "WHERE user.login=? and user.password=?";
     private static final String SQL_DELETE_USER_BY_ID =
             "DELETE FROM user WHERE id=?";
     private static final String SQL_CREATE_USER = "INSERT INTO user " +
@@ -52,7 +56,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             throw new DaoException(e);
         } finally {
             close(statement);
-            close(connection);
         }
         return userList;
     }
@@ -76,7 +79,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             throw new DaoException(e);
         } finally {
             close(preparedStatement);
-            close(connection);
         }
         return user;
     }
@@ -94,7 +96,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             throw new DaoException(e);
         } finally {
             close(preparedStatement);
-            close(connection);
         }
         return isDeleted == 1;
     }
@@ -131,18 +132,12 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         } catch(SQLException e) {
             throw new DaoException(e);
         } finally {
-            try {
-                resultSet.close();
-            } catch(SQLException | NullPointerException e) {}
-            try {
-                statement.close();
-            } catch(SQLException | NullPointerException e) {}
+            close(statement);
         }
     }
 
     @Override
-    public User update(User user) throws DaoException {
-        return null;
+    public void update(User user) throws DaoException {
     }
 
     @Override
@@ -168,8 +163,34 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             throw new DaoException(e);
         } finally {
             close(statement);
-            close(connection);
         }
         return userList;
+    }
+
+    @Override
+    public User findByLoginAndPassword(String login, String password) throws DaoException {
+        User user = new User();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_LOGIN_AND_PASSWORD);
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setSurname(resultSet.getString("surname"));
+                user.setEmail(resultSet.getString("email"));
+                user.setMobilePhone(resultSet.getString("mobile_phone"));
+                user.setRole(Role.values()[resultSet.getInt("role")]);
+                user.setLogin(login);
+                log.debug("user: ", user);
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            close(preparedStatement);
+        }
+        return user;
     }
 }

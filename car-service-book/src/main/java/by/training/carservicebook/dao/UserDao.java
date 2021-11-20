@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface UserDao extends Dao<User>{
     List<User> findUserByRole(Role role) throws DaoException;
-    User read(String login, String password) throws DaoException;
+    User findByLoginAndPassword(String login, String password) throws DaoException;
 }
