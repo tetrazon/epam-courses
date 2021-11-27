@@ -25,11 +25,11 @@ public class CarRecordServiceImpl extends ServiceImpl implements CarRecordServic
     }
 
     @Override
-    public boolean deleteById(Integer id) throws ServiceException {
+    public boolean deleteById(CarRecord carRecord) throws ServiceException {
         CarRecordDao dao;
         try {
             dao = transaction.createDao(CarRecordDao.class);
-            return dao.delete(id);
+            return dao.delete(carRecord.getId());
         } catch (DaoException e) {
             log.error("Dao exception");
             throw new ServiceException(e);

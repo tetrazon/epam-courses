@@ -22,7 +22,7 @@ public class CarRecordValidator implements Validator<CarRecord> {
 		parameter = request.getParameter("monthsInterval");
 		if(parameter != null) {
 			try {
-				carRecord.setMonthInterval(Integer.parseInt(parameter));
+				carRecord.setMonthsInterval(Integer.parseInt(parameter));
 			} catch(NumberFormatException e) {
 				throw new IncorrectFormDataException("monthsInterval", parameter);
 			}

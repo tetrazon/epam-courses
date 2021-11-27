@@ -11,11 +11,11 @@ import java.util.List;
 @Log4j2
 public class UserServiceImpl extends ServiceImpl implements UserService {
 	@Override
-	public List<User> findAll() throws ServiceException {
-		UserDao dao = null;
+	public List<User> findAll(Integer except) throws ServiceException {
+		UserDao dao;
 		try {
 			dao = transaction.createDao(UserDao.class);
-			return dao.findAll();
+			return dao.findAll(except);
 		} catch (DaoException e) {
 			log.error("Dao exception");
 			throw new ServiceException(e);
@@ -25,7 +25,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 
 	@Override
 	public User findById(Integer id) throws ServiceException {
-		UserDao dao = null;
+		UserDao dao;
 		try {
 			dao = transaction.createDao(UserDao.class);
 			return dao.findById(id);
@@ -38,7 +38,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 
 	@Override
 	public User findByLoginAndPassword(String login, String password) throws ServiceException {
-		UserDao dao = null;
+		UserDao dao;
 		try {
 			dao = transaction.createDao(UserDao.class);
 			return dao.findByLoginAndPassword(login, password);
@@ -51,7 +51,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 
 	@Override
 	public void save(User user) throws ServiceException {
-		UserDao dao = null;
+		UserDao dao;
 		try {
 			dao = transaction.createDao(UserDao.class);
 			if(user.getId() != null) {
@@ -70,7 +70,7 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 
 	@Override
 	public boolean delete(Integer id) throws ServiceException {
-		UserDao dao = null;
+		UserDao dao;
 		try {
 			dao = transaction.createDao(UserDao.class);
 			return dao.delete(id);
@@ -79,6 +79,18 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 			throw new ServiceException(e);
 		}
 
+	}
+
+	@Override
+	public void banUser(Integer userId, boolean isBanned) throws ServiceException{
+		UserDao dao;
+		try {
+			dao = transaction.createDao(UserDao.class);
+			dao.banUser(userId, isBanned);
+		} catch (DaoException e) {
+			log.error("Dao exception");
+			throw new ServiceException(e);
+		}
 	}
 
 }

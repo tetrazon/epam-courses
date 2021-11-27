@@ -22,7 +22,10 @@ public class LoginAction extends Action {
 				new MenuItem("/car/list.html", "мои авто")
 		)));
 		menu.put(Role.ADMIN, new ArrayList<>(Arrays.asList(
-				new MenuItem("/admin/main.html", " администрирование")
+				new MenuItem("/user/list.html", "администрирование")
+		)));
+		menu.put(Role.MASTER, new ArrayList<>(Arrays.asList(
+				new MenuItem("/service/list.html", "тендер")
 		)));
 	}
 

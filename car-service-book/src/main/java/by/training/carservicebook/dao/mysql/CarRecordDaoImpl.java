@@ -18,11 +18,11 @@ public class CarRecordDaoImpl extends BaseDao implements CarRecordDao {
             "SELECT car_record.id, car_id, km_interval, months_interval, description, is_periodic, is_tender, date, c.name category" +
                     "  from car_record join category c on c.id = car_record.category_id";
     private static final String SQL_SELECT_ALL_BY_CAR_ID =
-            "SELECT car_record.id, km_interval, months_interval, description, is_periodic, is_tender, date, c.name category" +
+            "SELECT car_record.id, car_record.km_interval, car_record.months_interval, car_record.description, car_record.is_periodic, is_tender, date, c.name category" +
                     "  from car_record join category c on c.id = car_record.category_id" +
                     " where car_id = ?";
     private static final String SQL_SELECT_BY_ID =
-            "SELECT car_id, km_interval, months_interval, description, is_periodic, is_tender, date, c.name category" +
+            "SELECT car_id, km_interval, months_interval, car_record.description, is_periodic, is_tender, date, c.name category" +
                     "  from car_record join category c on c.id = car_record.category_id" +
                     " where car_record.id = ?";
     private static final String SQL_UPDATE_BY_ID = "UPDATE car_record SET km_interval = ?, months_interval = ?, " +
@@ -84,6 +84,7 @@ public class CarRecordDaoImpl extends BaseDao implements CarRecordDao {
                     carRecord.setRecordDate(resultSet.getDate("date"));
                     carRecord.setCategory(resultSet.getString("category"));
                     carRecord.setDescription(resultSet.getString("description"));
+                    carRecord.setMonthsInterval(resultSet.getInt("months_interval"));
                     recordList.add(carRecord);
                 }
             } catch (SQLException e) {
@@ -114,6 +115,8 @@ public class CarRecordDaoImpl extends BaseDao implements CarRecordDao {
                 carRecord.setIsTender(resultSet.getBoolean("is_tender"));
                 carRecord.setRecordDate(resultSet.getDate("date"));
                 carRecord.setCategory(resultSet.getString("category"));
+                carRecord.setDescription(resultSet.getString("description"));
+                carRecord.setMonthsInterval(resultSet.getInt("months_interval"));
                 recordList.add(carRecord);
             }
         } catch (SQLException e) {
@@ -145,6 +148,8 @@ public class CarRecordDaoImpl extends BaseDao implements CarRecordDao {
                 carRecord.setIsTender(resultSet.getBoolean("is_tender"));
                 carRecord.setRecordDate(resultSet.getDate("date"));
                 carRecord.setCategory(resultSet.getString("category"));
+                carRecord.setDescription(resultSet.getString("description"));
+                carRecord.setMonthsInterval(resultSet.getInt("months_interval"));
             }
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -182,7 +187,7 @@ public class CarRecordDaoImpl extends BaseDao implements CarRecordDao {
             statement = connection.prepareStatement(SQL_CREATE, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, carRecord.getCar().getId());
             statement.setInt(2, carRecord.getKmInterval());
-            statement.setInt(3, carRecord.getMonthInterval());
+            statement.setInt(3, carRecord.getMonthsInterval());
             statement.setString(4, carRecord.getDescription());
             statement.setBoolean(5, carRecord.getIsPeriodic());
             statement.setBoolean(6, carRecord.getIsTender());
@@ -209,7 +214,7 @@ public class CarRecordDaoImpl extends BaseDao implements CarRecordDao {
         try {
             preparedStatement = connection.prepareStatement(SQL_UPDATE_BY_ID);
             preparedStatement.setInt(1, carRecord.getKmInterval());
-            preparedStatement.setInt(2, carRecord.getMonthInterval());
+            preparedStatement.setInt(2, carRecord.getMonthsInterval());
             preparedStatement.setString(3, carRecord.getDescription());
             preparedStatement.setBoolean(4, carRecord.getIsPeriodic());
             preparedStatement.setBoolean(5, carRecord.getIsTender());

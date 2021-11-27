@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CarRecordService extends Service{
     List<CarRecord> findCarRecordByCarId(Integer id) throws ServiceException;
-    boolean deleteById(Integer id) throws ServiceException;
+    boolean deleteById(CarRecord carRecord) throws ServiceException;
     Integer save(CarRecord carRecord) throws ServiceException;
     CarRecord findById(Integer id) throws ServiceException;
 }

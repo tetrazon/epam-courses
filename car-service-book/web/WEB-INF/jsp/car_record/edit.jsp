@@ -3,10 +3,25 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="u"%>
 <c:if test="${not empty carRecord}">
-<%--    <c:set var="category" value="${carRecord.category}"/>--%>
+    <c:set var="category" value="${carRecord.category}"/>
     <c:set var="description" value="${carRecord.description}"/>
     <c:set var="kmInterval" value="${carRecord.kmInterval}"/>
+    <c:set var="monthsInterval" value="${carRecord.monthsInterval}"/>
     <c:set var="recordDate" value="${carRecord.recordDate}"/>
+    <c:set var="isPeriodic" value="${carRecord.isPeriodic}"/>
+    <c:if test="${carRecord.isPeriodic == true}">
+        <c:set var="isPeriodic" value="да"/>
+    </c:if>
+    <c:if test="${carRecord.isPeriodic == false}">
+        <c:set var="isPeriodic" value="нет"/>
+    </c:if>
+    <c:if test="${carRecord.isTender == true}">
+        <c:set var="isTender" value="да"/>
+    </c:if>
+    <c:if test="${carRecord.isTender == false}">
+        <c:set var="isTender" value="нет"/>
+    </c:if>
+
 </c:if>
 <u:html title="TO" message="${message}">
     <H2>Авто</H2>
@@ -21,32 +36,51 @@
         <LABEL for="kmInterval">интервал, км:</LABEL>
         <INPUT type="number" id="kmInterval" name="kmInterval" value="${kmInterval}">
         <LABEL for="monthsInterval">интервал, мес:</LABEL>
-        <INPUT type="text" id="monthsInterval" name="monthsInterval" value="${monthsInterval}">
+        <INPUT type="number" id="monthsInterval" name="monthsInterval" value="${monthsInterval}">
         <LABEL for="description">описание:</LABEL>
         <INPUT type="text" id="description" name="description" value="${description}">
         <LABEL for="recordDate">дата:</LABEL>
         <INPUT type="date" id="recordDate" name="recordDate" value="${recordDate}"><br>
 
-        <p>категория:</p>
+       <%-- <p>категория:</p>
         <input type="radio" id="engine" name="category" value="Двигательная система">
         <label for="engine">Двигательная система</label><br>
         <input type="radio" id="brake" name="category" value="Система торможения">
         <label for="brake">Система торможения</label><br>
         <input type="radio" id="coolant" name="category" value="Система охлаждения">
-        <label for="coolant">Система охлаждения</label><br>
+        <label for="coolant">Система охлаждения</label><br>--%>
+
+        <label for="category">категория:</label>
+        <select name="category" id="category">
+            <option selected>${category}</option>
+            <option value="Двигательная система">Двигательная система</option>
+            <option value="Система торможения">Система торможения</option>
+            <option value="Топливная система">Топливная система</option>
+            <option value="Система охлаждения">Система охлаждения</option>
+            <option value="Система управления">Система управления</option>
+            <option value="Трансмиссия">Трансмиссия</option>
+            <option value="Электрическая система">Электрическая система</option>
+            <option value="Система подвески">Система подвески</option>
+            <option value="Система безопасности">Система безопасности</option>
+            <option value="Салон">Салон</option>
+            <option value="Кузов">Кузов</option>
+            <option value="Кузов">Другие системы</option>
+        </select>
 
 
-        <p>периодическая операция:</p>
-        <input type="radio" id="false" name="isPeriodic" value="false">
-        <label for="false">false</label><br>
-        <input type="radio" id="true" name="isPeriodic" value="true">
-        <label for="true">true</label><br>
+        <label for="isPeriodic">периодическая операция:</label>
+        <select name="isPeriodic" id="isPeriodic">
+            <option selected>${isPeriodic}</option>
+            <option value="true">да</option>
+            <option value="false">нет</option>
+        </select>
 
-        <p>актуально для выполнения:</p>
-        <input type="radio" id="false" name="isTender" value="false">
-        <label for="false">false</label><br>
-        <input type="radio" id="true" name="isTender" value="true">
-        <label for="true">true</label><br>
+        <label for="isTender">актуально для выполнения:</label>
+        <select name="isTender" id="isTender">
+            <option selected>${isPeriodic}</option>
+            <option value="true">да</option>
+            <option value="false">нет</option>
+        </select>
 
         <BUTTON type="submit">Сохранить</BUTTON>
         <BUTTON type="reset">Сбросить</BUTTON>

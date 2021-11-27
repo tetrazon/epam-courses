@@ -11,24 +11,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Log4j2
-public class CarRecordEditAction extends ClientAction {
+public class CarRecordDeleteAction extends ClientAction {
+
 	@Override
 	public Forward exec(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-		log.debug("carRecord edit action");
-		try{
-			Integer carRecordId = (Integer)request.getAttribute("carRecordId");
-			if(carRecordId == null) {
-				carRecordId = Integer.parseInt(request.getParameter("carRecordId"));
-			}
+		Forward forward = new Forward("/car_record/list.html");
+		try {
 			CarRecordService service = factory.getService(CarRecordService.class);
+			Integer carRecordId = Integer.parseInt(request.getParameter("carRecordId"));
 			CarRecord carRecord = service.findById(carRecordId);
-			if (carRecord != null){
-				request.setAttribute("carRecord", carRecord);
-				log.debug("car record descr: " + carRecord.getDescription());
+			if(carRecord != null) {
+				service.deleteById(carRecord);
+				forward.getAttributes().put("message", "Запись ТО удалена");
+				log.info(String.format("User \"%s\" deleted carRecord with id %d", getAuthorizedUser().getLogin(), carRecordId));
 			}
-
-		} catch (NumberFormatException e) {
+		} catch(NumberFormatException e) {
+			log.warn(String.format("Incorrect data was found when user \"%s\" tried to delete carRecord", getAuthorizedUser().getLogin()), e);
 		}
-		return null;
+		return forward;
 	}
 }

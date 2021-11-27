@@ -13,8 +13,8 @@ public class User extends Entity{
     private String mobilePhone;
     private String name;
     private String surname;
-    private boolean isBanned;
-    private boolean isArchived;
+    private Boolean isBanned;
+    private Boolean isArchived;
     private String district;
     private List<Car> cars;
 

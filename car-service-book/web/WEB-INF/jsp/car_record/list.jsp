@@ -11,15 +11,29 @@
                 <th>интервал, км </th>
                 <th>интервал, мес </th>
                 <th>периодическая операция </th>
+                <th>актуально для выполнения </th>
                 <th>дата </th>
             </tr>
             <c:forEach items="${carRecordList}" var="carRecord">
+                <c:if test="${carRecord.isPeriodic == true}">
+                    <c:set var="isPeriodic" value="да"/>
+                </c:if>
+                <c:if test="${carRecord.isPeriodic == false}">
+                    <c:set var="isPeriodic" value="нет"/>
+                </c:if>
+                <c:if test="${carRecord.isTender == true}">
+                    <c:set var="isTender" value="да"/>
+                </c:if>
+                <c:if test="${carRecord.isTender == false}">
+                    <c:set var="isTender" value="нет"/>
+                </c:if>
                 <tr>
                     <td>${carRecord.category} </td>
                     <td>${carRecord.description} </td>
                     <td>${carRecord.kmInterval} </td>
-                    <td>${carRecord.monthInterval} </td>
-                    <td>${carRecord.isPeriodic} </td>
+                    <td>${carRecord.monthsInterval} </td>
+                    <td>${isPeriodic} </td>
+                    <td>${isTender} </td>
                     <td>${carRecord.recordDate} </td>
                     <td>
                         <FORM id="form-${carRecord.id}" action="${carRecordEditUrl}" method="post">

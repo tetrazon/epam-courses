@@ -16,8 +16,9 @@ import java.util.List;
 @Log4j2
 public class UserDaoImpl extends BaseDao implements UserDao {
     private static final String SQL_SELECT_ALL_USERS =
-            "SELECT user.id, role, user.name, surname, email, mobile_phone, d.name district" +
-                    "  from user join district d on d.id = user.district_id";
+            "SELECT login, user.id, role, user.name, surname, email, mobile_phone, user.is_banned, d.name district" +
+                    "  from user join district d on d.id = user.district_id " +
+                    "WHERE user.id != ?";
     private static final String SQL_SELECT_USER_BY_ROLE =
             "SELECT user.id, user.name, surname, email, d.name district, mobile_phone FROM user " +
                     "join district d on d.id = user.district_id WHERE role=?";
@@ -34,13 +35,15 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     private static final String SQL_CREATE_USER = "INSERT INTO user " +
             "(login, password, role, name, surname, email, district_id, mobile_phone, is_banned, is_archived)" +
             "VALUES (?,?,?,?,?,?,(select id from district where district.name = ?),?, 0, 0);";
+    private static final String SQL_BAN_BY_ID = "UPDATE user SET is_banned = ? where id = ?";
     @Override
-    public List<User> findAll() throws DaoException {
+    public List<User> findAll(Integer except) throws DaoException {
         List<User> userList = new ArrayList<>();
-        Statement statement = null;
+        PreparedStatement preparedStatement = null;
         try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_USERS);
+            preparedStatement = connection.prepareStatement(SQL_SELECT_ALL_USERS);
+            preparedStatement.setInt(1, except);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
@@ -50,14 +53,36 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                 user.setMobilePhone(resultSet.getString("mobile_phone"));
                 user.setRole(Role.getByIdentity(resultSet.getInt("role")));
                 user.setDistrict(resultSet.getString("district"));
+                user.setLogin(resultSet.getString("login"));
+                user.setIsBanned(resultSet.getBoolean("is_banned"));
                 userList.add(user);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
-            close(statement);
+            close(preparedStatement);
         }
         return userList;
+    }
+
+    @Override
+    public void banUser(Integer userId, boolean isBanned) throws DaoException {
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(SQL_BAN_BY_ID);
+            preparedStatement.setBoolean(1, isBanned);
+            preparedStatement.setInt(2, userId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            close(preparedStatement);
+        }
+    }
+
+    @Override
+    public List<User> findAll() throws DaoException {
+        return findAll(0);
     }
 
     @Override
