@@ -42,6 +42,11 @@ public class LoginAction extends Action {
 			UserService service = factory.getService(UserService.class);
 			User user = service.findByLoginAndPassword(login, password);
 			if(user != null) {
+				if(user.getIsBanned()){
+					request.setAttribute("message", "Пользователь заблокирован. Пожалуйста, обратитесь к администратору");
+					log.info(String.format("banned user \"%s\" tried to log in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
+					return null;
+				}
 				HttpSession session = request.getSession();
 				session.setAttribute("authorizedUser", user);
 				session.setAttribute("menu", menu.get(user.getRole()));
@@ -49,7 +54,7 @@ public class LoginAction extends Action {
 				log.info(String.format("user \"%s\" is logged in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
 				return new Forward("/index.html");
 			} else {
-				request.setAttribute("message", "Имя пользователя или пароль не опознанны");
+				request.setAttribute("message", "Имя пользователя или пароль не опознаны");
 				log.info(String.format("user \"%s\" unsuccessfully tried to log in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
 			}
 		}

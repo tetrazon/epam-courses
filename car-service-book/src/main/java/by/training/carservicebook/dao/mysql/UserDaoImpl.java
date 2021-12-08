@@ -27,15 +27,21 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                     "join district d on d.id = user.district_id " +
                     "WHERE user.id=?";
     private static final String SQL_SELECT_USER_BY_LOGIN_AND_PASSWORD =
-            "SELECT user.id, user.name, surname, email, role, d.name district, mobile_phone FROM user " +
+            "SELECT user.id, user.name, surname, email, role, is_banned, d.name district, mobile_phone FROM user " +
                     "join district d on d.id = user.district_id " +
                     "WHERE user.login=? and user.password=?";
+    private static final String SQL_SELECT_USER_BY_LOGIN =
+            "SELECT user.id, user.name FROM user WHERE user.login = ?";
     private static final String SQL_DELETE_USER_BY_ID =
             "DELETE FROM user WHERE id=?";
     private static final String SQL_CREATE_USER = "INSERT INTO user " +
             "(login, password, role, name, surname, email, district_id, mobile_phone, is_banned, is_archived)" +
             "VALUES (?,?,?,?,?,?,(select id from district where district.name = ?),?, 0, 0);";
     private static final String SQL_BAN_BY_ID = "UPDATE user SET is_banned = ? where id = ?";
+    private static final String SQL_UPDATE_BY_ID = "UPDATE user SET login = ?, password = ?, " +
+            "name = ?, surname = ?, email = ?, district_id = (select id from district where district.name = ?), " +
+            "mobile_phone = ? WHERE user.id = ?";
+
     @Override
     public List<User> findAll(Integer except) throws DaoException {
         List<User> userList = new ArrayList<>();
@@ -78,6 +84,30 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         } finally {
             close(preparedStatement);
         }
+    }
+
+    @Override
+    public boolean userExistsByLogin(String login) throws DaoException {
+        User user = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_LOGIN);
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setLogin(login);
+                log.debug("user: ", user);
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            close(preparedStatement);
+        }
+        log.debug(String.format("user: %s", user));
+        return user != null;
     }
 
     @Override
@@ -163,6 +193,24 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     @Override
     public void update(User user) throws DaoException {
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(SQL_UPDATE_BY_ID);
+            preparedStatement.setString(1, user.getLogin());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getName());
+            preparedStatement.setString(4, user.getSurname());
+            preparedStatement.setString(5, user.getEmail());
+            preparedStatement.setString(6, user.getDistrict());
+            preparedStatement.setString(7, user.getMobilePhone());
+            preparedStatement.setInt(8, user.getId());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            close(preparedStatement);
+        }
     }
 
     @Override
@@ -194,7 +242,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
     @Override
     public User findByLoginAndPassword(String login, String password) throws DaoException {
-        User user = new User();
+        User user = null;
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_LOGIN_AND_PASSWORD);
@@ -202,12 +250,14 @@ public class UserDaoImpl extends BaseDao implements UserDao {
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                user = new User();
                 user.setId(resultSet.getInt("id"));
                 user.setName(resultSet.getString("name"));
                 user.setSurname(resultSet.getString("surname"));
                 user.setEmail(resultSet.getString("email"));
                 user.setMobilePhone(resultSet.getString("mobile_phone"));
                 user.setRole(Role.values()[resultSet.getInt("role")]);
+                user.setIsBanned(resultSet.getBoolean("is_banned"));
                 user.setLogin(login);
                 log.debug("user: ", user);
             }

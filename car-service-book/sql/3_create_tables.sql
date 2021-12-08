@@ -21,7 +21,7 @@ CREATE TABLE `user` (
                         `role` TINYINT NOT NULL,
                         `name` VARCHAR(40) NOT NULL,
                         `surname` VARCHAR(40) NOT NULL,
-                        `email` VARCHAR(255) NOT NULL UNIQUE,
+                        `email` VARCHAR(255) NOT NULL,
                         `district_id` INTEGER NOT NULL,
                         `mobile_phone` NCHAR(13) NOT NULL,
     /*
@@ -68,7 +68,7 @@ CREATE TABLE car (
                      CONSTRAINT fk_car_user FOREIGN KEY (`user_id`)
                          REFERENCES `user` (`id`)
                          ON UPDATE CASCADE
-                         ON DELETE RESTRICT
+                         ON DELETE CASCADE
 );
 
 CREATE TABLE `car_record` (
@@ -79,7 +79,6 @@ CREATE TABLE `car_record` (
                               `description` VARCHAR(255) NOT NULL,
                               is_periodic TINYINT NOT NULL ,
                               is_tender TINYINT NOT NULL ,
-
                               date DATE NOT NULL ,
     /*
 0 - Engine

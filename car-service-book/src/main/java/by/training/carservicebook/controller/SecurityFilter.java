@@ -39,7 +39,8 @@ public class SecurityFilter implements Filter {
 					session.removeAttribute("SecurityFilterMessage");
 				}
 			}
-			boolean canExecute = allowRoles == null;
+			boolean isNewUser = action.getName().equals("/register") || action.getName().equals("/user/save");
+			boolean canExecute = allowRoles == null || isNewUser;
 			if(user != null) {
 				userName = "\"" + user.getLogin() + "\" user";
 				canExecute = canExecute || allowRoles.contains(user.getRole());

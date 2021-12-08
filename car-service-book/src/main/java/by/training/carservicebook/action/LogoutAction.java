@@ -11,7 +11,6 @@ public class LogoutAction extends AuthorizedUserAction {
 
 	@Override
 	public Action.Forward exec(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-		//User user = getAuthorizedUser();
 		User user = (User) request.getSession(false).getAttribute("authorizedUser");
 		log.info(String.format("user \"%s\" is logged out", user.getLogin()));
 		request.getSession(false).invalidate();

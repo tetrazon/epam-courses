@@ -37,6 +37,18 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 	}
 
 	@Override
+	public boolean existByLogin(String login) throws ServiceException {
+		UserDao dao;
+		try {
+			dao = transaction.createDao(UserDao.class);
+			return dao.userExistsByLogin(login);
+		} catch (DaoException e) {
+			log.error("Dao exception");
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
 	public User findByLoginAndPassword(String login, String password) throws ServiceException {
 		UserDao dao;
 		try {
@@ -55,11 +67,11 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 		try {
 			dao = transaction.createDao(UserDao.class);
 			if(user.getId() != null) {
-				User oldUser = dao.findById(user.getId());
-				user.setPassword(oldUser.getPassword());
+				//User oldUser = dao.findById(user.getId());
+				//user.setPassword(oldUser.getPassword());
 				dao.update(user);
 			} else {
-				user.setId(dao.create(user));
+				dao.create(user);
 			}
 		} catch (DaoException e) {
 			log.error("Dao exception");

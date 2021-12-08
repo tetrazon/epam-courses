@@ -1,17 +1,16 @@
 package by.training.carservicebook.controller;
 
-import by.training.carservicebook.action.Action;
-import by.training.carservicebook.action.LoginAction;
-import by.training.carservicebook.action.LogoutAction;
-import by.training.carservicebook.action.MainAction;
+import by.training.carservicebook.action.*;
 import by.training.carservicebook.action.admin.UserBanAction;
 import by.training.carservicebook.action.admin.UserListAction;
 import by.training.carservicebook.action.client.*;
+import by.training.carservicebook.action.user.UserSaveAction;
 import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -25,6 +24,8 @@ public class ActionFromUriFilter implements Filter {
 		actions.put("/index", MainAction.class);
 		actions.put("/login", LoginAction.class);
 		actions.put("/logout", LogoutAction.class);
+		actions.put("/register", RegisterAction.class);
+
 
 		actions.put("/car/list", CarListAction.class);
 		actions.put("/car/edit", CarEditAction.class);
@@ -38,6 +39,8 @@ public class ActionFromUriFilter implements Filter {
 
 		actions.put("/user/list", UserListAction.class);
 		actions.put("/user/ban", UserBanAction.class);
+		actions.put("/user/save", UserSaveAction.class);
+
 	}
 
 	@Override
@@ -60,11 +63,11 @@ public class ActionFromUriFilter implements Filter {
 			}
 			Class<? extends Action> actionClass = actions.get(actionName);
 			try {
-				Action action = actionClass.newInstance();
+				Action action = actionClass.getDeclaredConstructor().newInstance();
 				action.setName(actionName);
 				httpRequest.setAttribute("action", action);
 				chain.doFilter(request, response);
-			} catch (InstantiationException | IllegalAccessException | NullPointerException e) {
+			} catch (InstantiationException | IllegalAccessException | NullPointerException | NoSuchMethodException | InvocationTargetException e) {
 				log.error("It is impossible to create action handler object", e);
 				httpRequest.setAttribute("error", String.format("Запрошенный адрес %s не может быть обработан сервером", uri));
 				httpRequest.getServletContext().getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(request, response);

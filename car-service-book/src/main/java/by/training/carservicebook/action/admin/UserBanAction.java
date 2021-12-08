@@ -23,9 +23,8 @@ public class UserBanAction extends AdminAction {
 			service.banUser(userId, isBanned);
 			log.debug(String.format("user with id %s banned: %s",userId, isBanned));
 			forward.getAttributes().put("message", String.format("пользователь с id %s забанен: %s",userId, isBanned ? "да" : "нет"));
-
-
 		} catch (NumberFormatException e) {
+			log.error("cannot parse userId", e);
 		}
 		return forward;
 	}

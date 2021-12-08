@@ -8,6 +8,7 @@ import java.util.List;
 public interface UserService extends Service {
     List<User> findAll(Integer except) throws ServiceException;
     User findById(Integer id) throws ServiceException;
+    boolean existByLogin(String login) throws ServiceException;
     User findByLoginAndPassword(String login, String password) throws ServiceException;
     void save(User user) throws ServiceException;
     boolean delete(Integer id) throws ServiceException;

@@ -29,6 +29,7 @@ public class User extends Entity{
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("User{");
+        sb.append("id='").append(super.getId()).append('\'');
         sb.append("login='").append(login).append('\'');
         sb.append(", role=").append(role);
         sb.append(", email='").append(email).append('\'');

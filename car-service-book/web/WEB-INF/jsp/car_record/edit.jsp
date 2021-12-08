@@ -42,14 +42,6 @@
         <LABEL for="recordDate">дата:</LABEL>
         <INPUT type="date" id="recordDate" name="recordDate" value="${recordDate}"><br>
 
-       <%-- <p>категория:</p>
-        <input type="radio" id="engine" name="category" value="Двигательная система">
-        <label for="engine">Двигательная система</label><br>
-        <input type="radio" id="brake" name="category" value="Система торможения">
-        <label for="brake">Система торможения</label><br>
-        <input type="radio" id="coolant" name="category" value="Система охлаждения">
-        <label for="coolant">Система охлаждения</label><br>--%>
-
         <label for="category">категория:</label>
         <select name="category" id="category">
             <option selected>${category}</option>
@@ -64,9 +56,8 @@
             <option value="Система безопасности">Система безопасности</option>
             <option value="Салон">Салон</option>
             <option value="Кузов">Кузов</option>
-            <option value="Кузов">Другие системы</option>
+            <option value="Другие системы">Другие системы</option>
         </select>
-
 
         <label for="isPeriodic">периодическая операция:</label>
         <select name="isPeriodic" id="isPeriodic">
