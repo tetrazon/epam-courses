@@ -28,6 +28,6 @@ INSERT INTO car_service_db.car_record (id, car_id, km_interval, months_interval,
 VALUES (1, 1, 5000, 12, 'Замена моторного масла', 1, 0, '2021-09-30', 1),
 (2, 2, 20000, 24, 'Замена тормозной жидкости', 1, 1, '2020-05-05', 2);
 
-INSERT INTO car_service_db.user (id, login, password, role, name, surname, email, district_id, mobile_phone, is_banned, is_archived)
-VALUES (3, 'user1', 'user1', 1, 'user1', 'user1', 'user1@mail.m', 1, '+375299999999', 0, 0);
+INSERT INTO car_service_db.user ( login, password, role, name, surname, email, district_id, mobile_phone, is_banned, is_archived)
+VALUES ('user1', 'user1', 1, 'user1', 'user1', 'user1@mail.m', 1, '+375299999999', 0, 0);
 

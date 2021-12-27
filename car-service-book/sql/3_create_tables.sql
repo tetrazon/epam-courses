@@ -41,16 +41,15 @@ CREATE TABLE `user` (
 
 
 CREATE TABLE `master` (
-                          id INTEGER NOT NULL AUTO_INCREMENT,
-
                           `user_id` INTEGER NOT NULL UNIQUE ,
                           `category_id` INTEGER NOT NULL ,
-                          CONSTRAINT master_pk PRIMARY KEY (`id`),
+                          CONSTRAINT master_pk PRIMARY KEY (user_id, category_id),
 
                           CONSTRAINT fk_master_user FOREIGN KEY (`user_id`)
                               REFERENCES `user` (`id`)
                               ON UPDATE CASCADE
-                              ON DELETE RESTRICT,
+                              ON DELETE CASCADE ,
+
                           CONSTRAINT
                               fk_master_category FOREIGN KEY (`category_id`)
                               REFERENCES `category` (`id`)
@@ -113,8 +112,8 @@ CREATE TABLE `car_record_history` (
                                           REFERENCES `car` (`id`)
                                           ON UPDATE CASCADE
                                           ON DELETE CASCADE ,
-                                          CONSTRAINT fk_car_record_history_master FOREIGN KEY (`master_id`)
-                                          REFERENCES `master` (`id`)
+                                          CONSTRAINT fk_car_record_history_user FOREIGN KEY (`master_id`)
+                                          REFERENCES `user` (`id`)
                                           ON UPDATE CASCADE
                                           ON DELETE SET NULL
 
@@ -132,7 +131,7 @@ CREATE TABLE `service_tender` (
                                       ON DELETE RESTRICT,
 
                                   CONSTRAINT fk_service_tender_master FOREIGN KEY (`master_id`)
-                                      REFERENCES `master` (`id`)
+                                      REFERENCES `user` (`id`)
                                       ON UPDATE CASCADE
                                       ON DELETE CASCADE,
 

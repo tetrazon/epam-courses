@@ -17,6 +17,7 @@ public class User extends Entity{
     private Boolean isArchived;
     private String district;
     private List<Car> cars;
+    private String category;
 
     public User(Integer userId) {
         super(userId);

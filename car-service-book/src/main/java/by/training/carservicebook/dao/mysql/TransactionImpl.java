@@ -17,6 +17,7 @@ public class TransactionImpl implements Transaction {
 		classes.put(UserDao.class, UserDaoImpl.class);
 		classes.put(CarDao.class, CarDaoImpl.class);
 		classes.put(CarRecordDao.class, CarRecordDaoImpl.class);
+		classes.put(OfferDao.class, OfferDaoImpl.class);
 	}
 
 	private Connection connection;

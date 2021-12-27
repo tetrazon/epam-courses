@@ -1,8 +1,8 @@
 package by.training.carservicebook.dao.mysql;
 
 import by.training.carservicebook.dao.BaseDao;
-import by.training.carservicebook.dao.exception.DaoException;
 import by.training.carservicebook.dao.UserDao;
+import by.training.carservicebook.dao.exception.DaoException;
 import by.training.carservicebook.entity.Role;
 import by.training.carservicebook.entity.User;
 import lombok.Data;
@@ -22,6 +22,9 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     private static final String SQL_SELECT_USER_BY_ROLE =
             "SELECT user.id, user.name, surname, email, d.name district, mobile_phone FROM user " +
                     "join district d on d.id = user.district_id WHERE role=?";
+    private static final String SQL_SELECT_USER_BY_ROLE_AND_DISTRICT =
+            "SELECT user.id, user.name, surname, email, mobile_phone FROM user " +
+                    "WHERE role=? AND district_id = (select id from district where district.name = ?)";
     private static final String SQL_SELECT_USER_BY_ID =
             "SELECT user.id, user.name, surname, email, d.name district, mobile_phone FROM user " +
                     "join district d on d.id = user.district_id " +
@@ -108,6 +111,33 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         }
         log.debug(String.format("user: %s", user));
         return user != null;
+    }
+
+    @Override
+    public List<User> findByRoleAndDistrict(Role role, String district) throws DaoException {
+        List<User> userList = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_ROLE_AND_DISTRICT);
+
+            preparedStatement.setInt(1, role.ordinal());
+            preparedStatement.setString(2, district);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setSurname(resultSet.getString("surname"));
+                user.setEmail(resultSet.getString("email"));
+                user.setMobilePhone(resultSet.getString("mobile_phone"));
+                userList.add(user);
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            close(preparedStatement);
+        }
+        return userList;
     }
 
     @Override
@@ -214,9 +244,8 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     }
 
     @Override
-    public List<User> findUserByRole(Role role) throws DaoException {
+    public List<User> findByRole(Role role) throws DaoException {
         List<User> userList = new ArrayList<>();
-        Statement statement = null;
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_ROLE);
@@ -235,7 +264,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
-            close(statement);
+            close(preparedStatement);
         }
         return userList;
     }
@@ -258,6 +287,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
                 user.setMobilePhone(resultSet.getString("mobile_phone"));
                 user.setRole(Role.values()[resultSet.getInt("role")]);
                 user.setIsBanned(resultSet.getBoolean("is_banned"));
+                user.setDistrict(resultSet.getString("district"));
                 user.setLogin(login);
                 log.debug("user: ", user);
             }

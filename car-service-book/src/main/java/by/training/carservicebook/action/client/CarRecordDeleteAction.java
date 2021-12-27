@@ -1,9 +1,7 @@
 package by.training.carservicebook.action.client;
 
-import by.training.carservicebook.entity.Car;
 import by.training.carservicebook.entity.CarRecord;
 import by.training.carservicebook.service.CarRecordService;
-import by.training.carservicebook.service.CarService;
 import by.training.carservicebook.service.exception.ServiceException;
 import lombok.extern.log4j.Log4j2;
 
@@ -21,7 +19,7 @@ public class CarRecordDeleteAction extends ClientAction {
 			Integer carRecordId = Integer.parseInt(request.getParameter("carRecordId"));
 			CarRecord carRecord = service.findById(carRecordId);
 			if(carRecord != null) {
-				service.deleteById(carRecord);
+				service.delete(carRecord);
 				forward.getAttributes().put("message", "Запись ТО удалена");
 				log.info(String.format("User \"%s\" deleted carRecord with id %d", getAuthorizedUser().getLogin(), carRecordId));
 			}

@@ -1,7 +1,6 @@
 package by.training.carservicebook.service;
 
 import by.training.carservicebook.dao.CarDao;
-import by.training.carservicebook.dao.UserDao;
 import by.training.carservicebook.dao.exception.DaoException;
 import by.training.carservicebook.entity.Car;
 import by.training.carservicebook.service.exception.ServiceException;

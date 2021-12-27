@@ -1,9 +1,6 @@
 package by.training.carservicebook.validator;
 
-import by.training.carservicebook.entity.Car;
-import by.training.carservicebook.entity.CarRecord;
-import by.training.carservicebook.entity.Entity;
-import by.training.carservicebook.entity.User;
+import by.training.carservicebook.entity.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -16,6 +13,7 @@ public class ValidatorFactory {
 		validators.put(User.class, UserValidator.class);
 		validators.put(Car.class, CarValidator.class);
 		validators.put(CarRecord.class, CarRecordValidator.class);
+		validators.put(Offer.class, OfferValidator.class);
 	}
 
 	@SuppressWarnings("unchecked")

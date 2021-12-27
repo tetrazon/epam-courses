@@ -33,6 +33,9 @@ public class CarRecordDaoImpl extends BaseDao implements CarRecordDao {
             "INSERT INTO car_service_db.car_record (car_id, km_interval, months_interval, description, " +
                     "is_periodic, is_tender, date, category_id)\n"
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, (select id from category where name = ?))";
+    private static final String SQL_CREATE_HISTORY =
+            "INSERT INTO car_service_db.car_record_history (car_id, date_performed, work_price, master_id, description) " +
+                     "VALUES (?, ?, ?, ?, ?)";
 
     @Override
     public List<CarRecord> findCarRecordIsOnTender() {
@@ -199,6 +202,32 @@ public class CarRecordDaoImpl extends BaseDao implements CarRecordDao {
                 return resultSet.getInt(1);
             } else {
                 log.error("There is no autoincrement index after trying to add record into table car_record");
+                throw new DaoException();
+            }
+        } catch (SQLException e){
+            throw new DaoException(e);
+        }finally {
+            close(statement);
+        }
+    }
+
+    @Override
+    public Integer addToHistory(CarRecord carRecord) throws DaoException {
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = connection.prepareStatement(SQL_CREATE_HISTORY, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, carRecord.getCar().getId());
+            statement.setDate(2, carRecord.getRecordDate());
+            statement.setDouble(3, carRecord.getWorkPrice());
+            statement.setInt(4, carRecord.getMaster().getId());
+            statement.setString(5, carRecord.getDescription());
+            statement.executeUpdate();
+            resultSet = statement.getGeneratedKeys();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            } else {
+                log.error("There is no autoincrement index after trying to add record into table car_record_history");
                 throw new DaoException();
             }
         } catch (SQLException e){

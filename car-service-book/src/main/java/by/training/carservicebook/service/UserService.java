@@ -1,5 +1,6 @@
 package by.training.carservicebook.service;
 
+import by.training.carservicebook.entity.Role;
 import by.training.carservicebook.entity.User;
 import by.training.carservicebook.service.exception.ServiceException;
 
@@ -13,4 +14,5 @@ public interface UserService extends Service {
     void save(User user) throws ServiceException;
     boolean delete(Integer id) throws ServiceException;
     void banUser(Integer userId, boolean isBanned) throws ServiceException;
+    List<User> findByRoleAndDistrict(Role role, String district) throws ServiceException;
 }

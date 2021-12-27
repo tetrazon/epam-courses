@@ -10,4 +10,6 @@ public interface CarRecordDao extends Dao<CarRecord> {
     List<CarRecord> findCarRecordIsOnTender();
     List<CarRecord> findCarRecordHistoryByCarId(Integer carId);
     List<CarRecord> findCarRecordByCarId(Integer carId) throws DaoException;
+
+    Integer addToHistory(CarRecord carRecord) throws DaoException;
 }

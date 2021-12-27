@@ -105,6 +105,7 @@ public class CarDaoImpl extends BaseDao implements CarDao {
                 car.setMileage(resultSet.getInt("mileage"));
                 car.setYear(resultSet.getInt("year"));
                 car.setModel(resultSet.getString("model"));
+                car.setUser(new User(resultSet.getInt("user_id")));
             }
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -138,7 +139,7 @@ public class CarDaoImpl extends BaseDao implements CarDao {
     @Override
     public Integer create(Car car) throws DaoException {
         PreparedStatement statement = null;
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         try {
             statement = connection.prepareStatement(SQL_CREATE, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, car.getModel());
@@ -162,9 +163,7 @@ public class CarDaoImpl extends BaseDao implements CarDao {
 
     @Override
     public void update(Car car) throws DaoException {
-        String sql = "UPDATE car SET model = ?, mileage = ?, year = ? WHERE id = ?";
         PreparedStatement statement = null;
-        ResultSet resultSet = null;
         try {
             statement = connection.prepareStatement(SQL_UPDATE);
             statement.setString(1, car.getModel());

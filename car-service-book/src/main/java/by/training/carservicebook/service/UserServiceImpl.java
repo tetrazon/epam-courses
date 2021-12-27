@@ -1,7 +1,8 @@
 package by.training.carservicebook.service;
 
-import by.training.carservicebook.dao.exception.DaoException;
 import by.training.carservicebook.dao.UserDao;
+import by.training.carservicebook.dao.exception.DaoException;
+import by.training.carservicebook.entity.Role;
 import by.training.carservicebook.entity.User;
 import by.training.carservicebook.service.exception.ServiceException;
 import lombok.extern.log4j.Log4j2;
@@ -99,6 +100,18 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 		try {
 			dao = transaction.createDao(UserDao.class);
 			dao.banUser(userId, isBanned);
+		} catch (DaoException e) {
+			log.error("Dao exception");
+			throw new ServiceException(e);
+		}
+	}
+
+	@Override
+	public List<User> findByRoleAndDistrict(Role role, String district) throws ServiceException {
+		UserDao dao;
+		try {
+			dao = transaction.createDao(UserDao.class);
+			return dao.findByRoleAndDistrict(role, district);
 		} catch (DaoException e) {
 			log.error("Dao exception");
 			throw new ServiceException(e);
