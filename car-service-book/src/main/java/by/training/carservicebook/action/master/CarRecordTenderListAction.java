@@ -47,15 +47,6 @@ public class CarRecordTenderListAction extends MasterAction {
 			carList = carList.stream()
 					.filter(car -> !car.getCarRecords().isEmpty())
 							.collect(Collectors.toList());
-			/*carList.forEach(car -> {
-				try {
-					carRecordList.addAll(carRecordService.findByCarIdAndTender(car.getId(), true));
-				} catch (ServiceException e) {
-					log.warn(String.format("Incorrect data was found when trying get car records for carId: \"%s\" ", car.getId()), e);
-				}
-			});*/
-			//log.debug(String.format("carRecordList: %s", carRecordList));
-			//request.getSession().setAttribute("carRecordList", carRecordList);
 			request.getSession().setAttribute("carList", carList);
 		}
 		return null;

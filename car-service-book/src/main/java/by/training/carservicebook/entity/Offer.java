@@ -20,5 +20,10 @@ public class Offer extends Entity{
         this.isSelected = false;
     }
 
-
+    public Offer(CarRecord carRecord, User master, double price, Boolean isSelected) {
+        this.carRecord = carRecord;
+        this.master = master;
+        this.price = price;
+        this.isSelected = isSelected;
+    }
 }

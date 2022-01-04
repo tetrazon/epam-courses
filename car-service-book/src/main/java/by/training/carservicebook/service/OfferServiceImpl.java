@@ -3,6 +3,7 @@ package by.training.carservicebook.service;
 import by.training.carservicebook.dao.CarDao;
 import by.training.carservicebook.dao.OfferDao;
 import by.training.carservicebook.dao.exception.DaoException;
+import by.training.carservicebook.entity.CarRecord;
 import by.training.carservicebook.entity.Offer;
 import by.training.carservicebook.service.exception.ServiceException;
 import lombok.extern.log4j.Log4j2;
@@ -108,5 +109,23 @@ public class OfferServiceImpl extends ServiceImpl implements OfferService {
             log.error("Dao exception");
             throw new ServiceException(e);
         }
+    }
+
+    @Override
+    public List<Offer> getOffersByCarRecords(List<CarRecord> carRecordList) throws ServiceException {
+        List<Offer> offerList = getAll();
+        List<Integer> carRecordIdList = carRecordList.parallelStream()
+                        .map(CarRecord::getId)
+                        .collect(Collectors.toList());
+        offerList = offerList.parallelStream()
+                .filter(offer -> carRecordIdList.contains(offer.getCarRecord().getId()))
+                .map(offer -> new Offer(carRecordList.parallelStream()
+                                .filter(carRecord -> offer.getCarRecord().getId().equals(carRecord.getId()))
+                                .findFirst()
+                                .orElse(offer.getCarRecord()), offer.getMaster(), offer.getPrice(), offer.getIsSelected()
+                                ))
+                .collect(Collectors.toList());
+
+        return offerList;
     }
 }

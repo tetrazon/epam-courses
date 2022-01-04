@@ -20,6 +20,7 @@ public class CarRecordEditAction extends ClientAction {
 			if(carRecordId == null) {
 				carRecordId = Integer.parseInt(request.getParameter("carRecordId"));
 			}
+
 			CarRecordService service = factory.getService(CarRecordService.class);
 			CarRecord carRecord = service.findById(carRecordId);
 			if (carRecord != null){

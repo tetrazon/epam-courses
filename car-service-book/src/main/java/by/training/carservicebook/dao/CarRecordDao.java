@@ -7,8 +7,7 @@ import java.sql.Date;
 import java.util.List;
 
 public interface CarRecordDao extends Dao<CarRecord> {
-    List<CarRecord> findCarRecordIsOnTender();
-    List<CarRecord> findCarRecordHistoryByCarId(Integer carId);
+    List<CarRecord> findCarRecordHistoryByCarId(Integer carId) throws DaoException;
     List<CarRecord> findCarRecordByCarId(Integer carId) throws DaoException;
 
     Integer addToHistory(CarRecord carRecord) throws DaoException;

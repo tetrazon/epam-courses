@@ -4,6 +4,9 @@
 <u:html title="${title}" message="${message}">
     <c:url value="/car/edit.html" var="carEditUrl"/>
     <c:url value="/car_record/list.html" var="carRecordUrl"/>
+    <c:url value="/car_record/offer_list.html" var="carRecordOfferListUrl"/>
+    <c:url value="/car_record/history.html" var="carRecordHistoryUrl"/>
+
     <c:if test="${not empty carList}">
             <h2>Гараж</h2>
         <table>
@@ -23,6 +26,18 @@
                         <FORM id="form-${car.id}" action="${carRecordUrl}" method="post">
                             <INPUT type="hidden" name="carId" value="${car.id}">
                             <BUTTON type="submit">Cписок ТО</BUTTON>
+                        </FORM>
+                    </td>
+                    <td>
+                        <FORM id="form-${car.id}" action="${carRecordHistoryUrl}" method="post">
+                            <INPUT type="hidden" name="carId" value="${car.id}">
+                            <BUTTON type="submit">история ТО</BUTTON>
+                        </FORM>
+                    </td>
+                    <td>
+                        <FORM id="form-${car.id}" action="${carRecordOfferListUrl}" method="post">
+                            <INPUT type="hidden" name="carId" value="${car.id}">
+                            <BUTTON type="submit">Предложения мастеров по ТО</BUTTON>
                         </FORM>
                     </td>
                 </tr>

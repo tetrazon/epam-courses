@@ -15,25 +15,27 @@ import java.util.List;
 public class CarRecordListAction extends ClientAction {
 	@Override
 	public Forward exec(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-		//final User user = getAuthorizedUser();
-		Integer carId = (Integer) request.getSession(false).getAttribute("carId");
-		try{
-			if (carId == null){
+		try {
+			Integer carId = (Integer) request.getAttribute("carId");
+			if (carId == null) {
 				carId = Integer.parseInt(request.getParameter("carId"));
 			}
-		} catch (NumberFormatException e){}
-		if(carId != null) {
-			log.debug(String.format("car id: %s", carId));
-			CarService carService = factory.getService(CarService.class);
-			Car car = carService.getCarById(carId);
-			if (car != null){
-				request.getSession().setAttribute("carModel", car.getModel());
-				request.getSession().setAttribute("carId", carId);
+			if (carId != null) {
+				log.debug(String.format("car id: %s", carId));
+				CarService carService = factory.getService(CarService.class);
+				Car car = carService.getCarById(carId);
+				if (car != null) {
+					request.getSession().setAttribute("carModel", car.getModel());
+					request.getSession().setAttribute("carId", carId);
+					CarRecordService carRecordService = factory.getService(CarRecordService.class);
+					final List<CarRecord> carRecordList = carRecordService.findCarRecordByCarId(carId);
+					log.debug(String.format("carRecordList: %s", carRecordList));
+					request.getSession().setAttribute("carRecordList", carRecordList);
+				}
 			}
-			CarRecordService carRecordService = factory.getService(CarRecordService.class);
-			final List<CarRecord> carRecordList = carRecordService.findCarRecordByCarId(carId);
-			log.debug(String.format("carRecordList: %s", carRecordList));
-			request.getSession().setAttribute("carRecordList", carRecordList);
+
+		} catch (NumberFormatException e) {
+			log.warn("error parse car id");
 		}
 		return null;
 	}

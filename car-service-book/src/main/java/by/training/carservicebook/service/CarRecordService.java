@@ -14,4 +14,5 @@ public interface CarRecordService extends Service{
     List <CarRecord> findByCarIdAndTender(Integer id, boolean isTender) throws ServiceException;
     List <CarRecord> findByOffers(List<Offer> offers) throws ServiceException;
     void markDone(CarRecord carRecord) throws ServiceException;
+    List<CarRecord> findCarRecordHistoryByCarId(Integer carId) throws ServiceException;
 }

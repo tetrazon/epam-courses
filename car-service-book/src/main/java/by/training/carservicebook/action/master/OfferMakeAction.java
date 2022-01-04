@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Log4j2
-public class CarRecordOfferAction extends MasterAction {
+public class OfferMakeAction extends MasterAction {
 	@Override
 	public Forward exec(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
 		Forward forward = new Forward("/car_record/tender_list.html");
@@ -28,9 +28,6 @@ public class CarRecordOfferAction extends MasterAction {
 		try {
 			if(user != null && user.getRole().equals(Role.MASTER)) {
 				OfferService offerService = factory.getService(OfferService.class);
-				//Integer carRecordId = (Integer) request.getAttribute("carRecordId");
-				//Double price = (Double) request.getAttribute("price");
-				//Offer offer = new Offer(carRecordId, user, price);
 				Offer offer = validator.validate(request);
 				offer.setMaster(user);
 				offerService.save(offer);

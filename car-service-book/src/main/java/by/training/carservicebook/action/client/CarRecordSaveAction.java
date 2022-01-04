@@ -28,6 +28,7 @@ public class CarRecordSaveAction extends ClientAction {
 			final Integer carRecordId = service.save(carRecord);
 			log.debug(String.format("user %s saved carRecord with id: %s", user.getLogin() ,carRecordId));
 			forward.getAttributes().put("carRecordId", carRecordId);
+			forward.getAttributes().put("carId", Integer.parseInt(request.getParameter("carId")));
 			forward.getAttributes().put("message", "Данные ТО успешно сохранены");
 
 		} catch (IncorrectFormDataException e) {

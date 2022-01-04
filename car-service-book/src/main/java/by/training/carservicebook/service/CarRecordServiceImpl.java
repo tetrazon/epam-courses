@@ -120,7 +120,6 @@ public class CarRecordServiceImpl extends ServiceImpl implements CarRecordServic
         CarRecord carRecordFromDao = findById(carRecord.getId());
         if (carRecordFromDao.getIsPeriodic()){
             carRecordFromDao.setRecordDate(new Date(System.currentTimeMillis()));
-            carRecordFromDao.setIsTender(false);
             save(carRecordFromDao);
         } else {
             delete(carRecordFromDao);
@@ -129,6 +128,18 @@ public class CarRecordServiceImpl extends ServiceImpl implements CarRecordServic
         carRecord.setRecordDate(new Date(System.currentTimeMillis()));
         carRecord.setDescription(carRecordFromDao.getDescription());
         addToHistory(carRecord);
+    }
+
+    @Override
+    public List<CarRecord> findCarRecordHistoryByCarId(Integer carId) throws ServiceException {
+        CarRecordDao dao;
+        try {
+            dao = transaction.createDao(CarRecordDao.class);
+            return dao.findCarRecordHistoryByCarId(carId);
+        } catch (DaoException e) {
+            log.error("Dao exception");
+            throw new ServiceException(e);
+        }
     }
 
 }

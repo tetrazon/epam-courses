@@ -47,6 +47,7 @@
         </table>
     </c:if>
     <FORM action="${carRecordEditUrl}" method="post">
+        <INPUT type="hidden" name="carId" value="${carId}">
         <BUTTON type="submit">Добавить запись</BUTTON>
     </FORM>
 </u:html>

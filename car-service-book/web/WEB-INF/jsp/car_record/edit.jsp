@@ -29,10 +29,10 @@
     <FORM action="${carRecordSaveUrl}" method="post">
         <c:if test="${not empty carRecord}">
             <INPUT type="hidden" name="id" value="${carRecord.id}">
+
         </c:if>
 
-        <LABEL for="carId">ID авто:</LABEL>
-        <INPUT type="number" id="carId" name="carId" value="${carId}">
+        <INPUT type="hidden" id="carId" name="carId" value="${carId}">
         <LABEL for="kmInterval">интервал, км:</LABEL>
         <INPUT type="number" id="kmInterval" name="kmInterval" value="${kmInterval}">
         <LABEL for="monthsInterval">интервал, мес:</LABEL>

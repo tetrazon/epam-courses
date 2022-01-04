@@ -7,7 +7,7 @@ import by.training.carservicebook.action.client.*;
 import by.training.carservicebook.action.master.CarRecordApprovedAction;
 import by.training.carservicebook.action.master.CarRecordDoneAction;
 import by.training.carservicebook.action.master.CarRecordTenderListAction;
-import by.training.carservicebook.action.master.CarRecordOfferAction;
+import by.training.carservicebook.action.master.OfferMakeAction;
 import by.training.carservicebook.action.user.UserSaveAction;
 import lombok.extern.log4j.Log4j2;
 
@@ -41,14 +41,20 @@ public class ActionFromUriFilter implements Filter {
 		actions.put("/car_record/save", CarRecordSaveAction.class);
 		actions.put("/car_record/delete", CarRecordDeleteAction.class);
 		actions.put("/car_record/tender_list", CarRecordTenderListAction.class);
-		actions.put("/car_record/offer", CarRecordOfferAction.class);
+		actions.put("/car_record/offer", OfferMakeAction.class);
 		actions.put("/car_record/approved", CarRecordApprovedAction.class);
 		actions.put("/car_record/done", CarRecordDoneAction.class);
+		actions.put("/car_record/offer_list", OfferListAction.class);
+		actions.put("/car_record/history", CarRecordHistoryAction.class);
 
 
 		actions.put("/user/list", UserListAction.class);
 		actions.put("/user/ban", UserBanAction.class);
 		actions.put("/user/save", UserSaveAction.class);
+
+		actions.put("/offer/accept", OfferAcceptAction.class);
+
+
 
 	}
 
