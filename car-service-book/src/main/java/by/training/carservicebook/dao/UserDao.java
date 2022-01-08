@@ -13,4 +13,5 @@ public interface UserDao extends Dao<User>{
     void banUser(Integer userId, boolean isBanned) throws DaoException;
     boolean userExistsByLogin(String login) throws DaoException;
     List<User> findByRoleAndDistrict(Role role, String district) throws DaoException;
+    User findByLogin(String login) throws DaoException;
 }

@@ -26,7 +26,7 @@
 
 
         <LABEL for="password">пароль</LABEL>
-        <INPUT required type="text" id="password" name="password">
+        <INPUT required type="password" id="password" name="password">
         <LABEL for="name">имя</LABEL>
         <INPUT required type="text" id="name" name="name" value="${name}">
         <LABEL for="surname">фамилия</LABEL>

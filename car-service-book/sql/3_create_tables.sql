@@ -17,7 +17,7 @@ CREATE TABLE `category`
 CREATE TABLE `user` (
                         id INTEGER NOT NULL AUTO_INCREMENT,
                         login VARCHAR(40) NOT NULL UNIQUE,
-                        password NCHAR(32) NOT NULL,
+                        password NCHAR(60) NOT NULL,
                         `role` TINYINT NOT NULL,
                         `name` VARCHAR(40) NOT NULL,
                         `surname` VARCHAR(40) NOT NULL,

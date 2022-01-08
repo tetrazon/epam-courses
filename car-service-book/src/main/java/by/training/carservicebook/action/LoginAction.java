@@ -2,6 +2,8 @@ package by.training.carservicebook.action;
 
 import by.training.carservicebook.entity.Role;
 import by.training.carservicebook.entity.User;
+import by.training.carservicebook.hash.HashGenerator;
+import by.training.carservicebook.hash.HashGeneratorFactory;
 import by.training.carservicebook.service.UserService;
 import by.training.carservicebook.service.exception.ServiceException;
 import lombok.extern.log4j.Log4j2;
@@ -39,6 +41,8 @@ public class LoginAction extends Action {
 	public Action.Forward exec(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
+
+		//String hashedPassword = request.getParameter("password");
 		if(login != null && password != null) {
 			UserService service = factory.getService(UserService.class);
 			User user = service.findByLoginAndPassword(login, password);
