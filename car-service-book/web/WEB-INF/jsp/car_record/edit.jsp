@@ -34,16 +34,16 @@
 
         <INPUT type="hidden" id="carId" name="carId" value="${carId}">
         <LABEL for="kmInterval">интервал, км:</LABEL>
-        <INPUT type="number" id="kmInterval" name="kmInterval" value="${kmInterval}">
+        <INPUT type="number" min="100" required="required" max="200000" id="kmInterval" name="kmInterval" value="${kmInterval}">
         <LABEL for="monthsInterval">интервал, мес:</LABEL>
-        <INPUT type="number" id="monthsInterval" name="monthsInterval" value="${monthsInterval}">
+        <INPUT type="number" required="required" min="1" max="36" id="monthsInterval" name="monthsInterval" value="${monthsInterval}">
         <LABEL for="description">описание:</LABEL>
-        <INPUT type="text" id="description" name="description" value="${description}">
+        <INPUT type="text" required="required" minlength="3" maxlength="255" id="description" name="description" value="${description}">
         <LABEL for="recordDate">дата:</LABEL>
-        <INPUT type="date" id="recordDate" name="recordDate" value="${recordDate}"><br>
+        <INPUT type="date" required="required" min="2020-01-01" id="recordDate" name="recordDate" value="${recordDate}"><br>
 
         <label for="category">категория:</label>
-        <select name="category" id="category">
+        <select name="category" id="category" required="required">
             <option selected>${category}</option>
             <option value="Двигательная система">Двигательная система</option>
             <option value="Система торможения">Система торможения</option>
@@ -60,14 +60,14 @@
         </select>
 
         <label for="isPeriodic">периодическая операция:</label>
-        <select name="isPeriodic" id="isPeriodic">
+        <select name="isPeriodic" id="isPeriodic" required="required">
             <option selected>${isPeriodic}</option>
             <option value="true">да</option>
             <option value="false">нет</option>
         </select>
 
         <label for="isTender">актуально для выполнения:</label>
-        <select name="isTender" id="isTender">
+        <select name="isTender" id="isTender" required="required">
             <option selected>${isPeriodic}</option>
             <option value="true">да</option>
             <option value="false">нет</option>

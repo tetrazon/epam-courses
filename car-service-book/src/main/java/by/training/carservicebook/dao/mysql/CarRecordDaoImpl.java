@@ -99,7 +99,6 @@ public class CarRecordDaoImpl extends BaseDao implements CarRecordDao {
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_RECORDS);
-            //car_record.id, car_id, km_interval, months_interval, description, is_periodic, is_tender, date, c.name category
             while(resultSet.next()){
                 CarRecord carRecord = new CarRecord();
                 final Car car = new Car();
@@ -132,7 +131,6 @@ public class CarRecordDaoImpl extends BaseDao implements CarRecordDao {
             preparedStatement = connection.prepareStatement(SQL_SELECT_BY_ID);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            //car_record.id, car_id, km_interval, months_interval, description, is_periodic, is_tender, date, c.name category
             while(resultSet.next()){
                 carRecord = new CarRecord();
                 final Car car = new Car();

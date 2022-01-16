@@ -205,7 +205,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         PreparedStatement preparedStatement = null;
         int isDeleted = 0;
         try {
-            //connection = ConnectionCreator.createConnection();
             preparedStatement = connection.prepareStatement(SQL_DELETE_USER_BY_ID);
             preparedStatement.setInt(1, id);
             isDeleted = preparedStatement.executeUpdate();
@@ -225,7 +224,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
     @Override
     public Integer create(User user) throws DaoException {
         PreparedStatement statement = null;
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         try {
             statement = connection.prepareStatement(SQL_CREATE_USER, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getLogin());
@@ -280,7 +279,6 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_ROLE);
-
             preparedStatement.setInt(1, role.ordinal());
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){

@@ -31,7 +31,6 @@ public class OfferListAction extends ClientAction {
 			Car car = carService.getCarById(carId);
 			if (car != null){
 				request.getSession().setAttribute("carModel", car.getModel());
-				//request.getSession().setAttribute("carId", carId);
 			}
 			CarRecordService carRecordService = factory.getService(CarRecordService.class);
 			List<CarRecord> carRecordList = carRecordService.findCarRecordByCarId(carId);
@@ -40,7 +39,6 @@ public class OfferListAction extends ClientAction {
 							.filter(carRecord -> !carRecord.getIsTender())
 							.collect(Collectors.toList());
 			log.debug(String.format("carRecordList: %s", carRecordList));
-			//request.getSession().setAttribute("carRecordList", carRecordList);
 
 			OfferService offerService = factory.getService(OfferService.class);
 			List<Offer> offerList = offerService.getOffersByCarRecords(carRecordList);

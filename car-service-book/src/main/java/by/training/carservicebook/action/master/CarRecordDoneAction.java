@@ -24,7 +24,7 @@ public class CarRecordDoneAction extends MasterAction {
 		log.debug(String.format("user: %s", user));
 			if(user != null && user.getRole().equals(Role.MASTER)) {
 				Integer carRecordId = Integer.valueOf(request.getParameter("carRecordId"));
-				Double price = Double.valueOf(request.getParameter("price"));
+				double price = Double.parseDouble(request.getParameter("price"));
 				CarRecord doneCarRecord = new CarRecord(carRecordId);
 				doneCarRecord.setWorkPrice(price);
 				doneCarRecord.setMaster(user);

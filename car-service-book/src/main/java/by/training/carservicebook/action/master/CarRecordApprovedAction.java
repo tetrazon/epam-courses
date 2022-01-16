@@ -36,11 +36,7 @@ public class CarRecordApprovedAction extends MasterAction {
 				offer.setCarRecord(carRecord);
 			}
 			log.debug(String.format("offerList: %s", offerList));
-
-			List<CarRecord> carRecordList = carRecordService.findByOffers(offerList);
-			//log.debug(String.format("carRecordList: %s", carRecordList));
 			request.getSession().setAttribute("offerList", offerList);
-			//request.getSession().setAttribute("carList", carList);
 		}
 		return null;
 	}

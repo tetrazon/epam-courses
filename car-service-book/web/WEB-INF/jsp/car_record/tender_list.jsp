@@ -28,7 +28,7 @@
                                     <FORM id="form-${carRecord.id}" action="${offerPrice}" method="post">
                                         <INPUT type="hidden" name="carRecordId" value="${carRecord.id}">
                                         <LABEL for="price">цена за работу: </LABEL>
-                                        <INPUT type="number" id="price" name="price" step="0.01">
+                                        <INPUT type="number" id="price" name="price" required="required" step="0.01">
                                         <BUTTON type="submit">предложить цену</BUTTON>
                                     </FORM>
                                 </td>

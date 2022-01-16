@@ -72,6 +72,9 @@ public class UserServiceImpl extends ServiceImpl implements UserService {
 		try {
 			dao = transaction.createDao(UserDao.class);
 			User user = dao.findByLogin(login);
+			if (user == null){
+				return null;
+			}
 			boolean isSamePassword = hashGenerator.check(password, user.getPassword());
 			return isSamePassword ? user : null;
 		} catch (DaoException e) {

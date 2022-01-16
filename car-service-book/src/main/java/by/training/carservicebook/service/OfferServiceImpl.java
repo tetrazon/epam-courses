@@ -26,21 +26,6 @@ public class OfferServiceImpl extends ServiceImpl implements OfferService {
         }
     }
 
-    /*@Override
-    public List<Offer> getByMasterId(Integer masterId) throws ServiceException {
-        OfferDao dao;
-        try {
-            dao = transaction.createDao(OfferDao.class);
-            List<Offer> offerList = dao.findAll();
-            return offerList.stream()
-                    .filter(offer -> Objects.equals(offer.getMaster().getId(), masterId))
-                    .collect(Collectors.toList());
-        } catch (DaoException e) {
-            log.error("Dao exception");
-            throw new ServiceException(e);
-        }
-    }*/
-
     @Override
     public List<Offer> getSelectedByMasterId(Integer masterId) throws ServiceException {
         OfferDao dao;

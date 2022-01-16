@@ -6,6 +6,7 @@ import by.training.carservicebook.hash.HashGenerator;
 import by.training.carservicebook.hash.HashGeneratorFactory;
 import by.training.carservicebook.service.UserService;
 import by.training.carservicebook.service.exception.ServiceException;
+import by.training.carservicebook.util.ResourceBundleCreator;
 import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,26 +42,36 @@ public class LoginAction extends Action {
 	public Action.Forward exec(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
-
-		//String hashedPassword = request.getParameter("password");
+		HttpSession session = request.getSession();
 		if(login != null && password != null) {
 			UserService service = factory.getService(UserService.class);
 			User user = service.findByLoginAndPassword(login, password);
-			if(user != null) {
-				if(user.getIsBanned()){
+			if (user != null) {
+				if (user.getIsBanned()) {
 					request.setAttribute("message", "Пользователь заблокирован. Пожалуйста, обратитесь к администратору");
 					log.info(String.format("banned user \"%s\" tried to log in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
 					return null;
 				}
-				HttpSession session = request.getSession();
+
 				session.setAttribute("authorizedUser", user);
 				session.setAttribute("menu", menu.get(user.getRole()));
 				log.debug(String.format("user: %s", user));
 				log.info(String.format("user \"%s\" is logged in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
 				return new Forward("/index.html");
 			} else {
-				request.setAttribute("message", "Имя пользователя или пароль не опознаны");
+				String lang = (String) session.getAttribute("language");
+				if (lang == null) {
+					lang = request.getParameter("language");
+					if (lang == null) {
+						lang = "en_US";
+					}
+				}
+				ResourceBundle rb = ResourceBundleCreator.createResourceBundle(lang, "props.messages");
+				request.setAttribute("message", rb.getString("error.wrongCreds"));
+				//Forward forward = new Forward("/login.html");
+				//forward.getAttributes().put("message", rb.getString("error.wrongCreds"));
 				log.info(String.format("user \"%s\" unsuccessfully tried to log in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
+				//return forward;
 			}
 		}
 		return null;

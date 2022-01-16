@@ -31,7 +31,7 @@
         <INPUT required type="text" id="name" name="name" value="${name}">
         <LABEL for="surname">фамилия</LABEL>
         <INPUT required type="text" id="surname" name="surname" value="${surname}">
-            <c:if test="${empty authorizedUser}">
+        <c:if test="${empty authorizedUser}">
         <LABEL for="login">логин</LABEL>
         <INPUT required type="text" id="login" name="login">
         <label>Роль</label><br>

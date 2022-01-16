@@ -11,7 +11,6 @@ public class ConnectionCreator {
     private static final String DATABASE_URL;
     static {
         try {
-            //properties.load(new FileReader("/database.properties"));
             properties.load(ConnectionCreator.class.getResourceAsStream("/database.properties"));
             String driverName = (String) properties.get("db.driver");
             Class.forName(driverName);

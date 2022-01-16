@@ -86,7 +86,6 @@ public class OfferDaoImpl extends BaseDao implements OfferDao {
     public Integer create(Offer offer) throws DaoException {
         PreparedStatement statement = null;
         try {
-            //"INSERT INTO service_tender (car_record_id, master_id, price, is_selected) VALUES (?, ?, ?, ?)";
             statement = connection.prepareStatement(SQL_CREATE);
             statement.setInt(1, offer.getCarRecord().getId());
             statement.setInt(2, offer.getMaster().getId());

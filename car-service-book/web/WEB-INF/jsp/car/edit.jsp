@@ -15,11 +15,11 @@
             <INPUT type="hidden" name="id" value="${car.id}">
         </c:if>
         <LABEL for="model">модель:</LABEL>
-        <INPUT type="text" id="model" name="model" value="${model}">
+        <INPUT type="text" id="model" required="" minlength="2" maxlength="30" name="model" value="${model}">
         <LABEL for="mileage">пробег (км):</LABEL>
-        <INPUT type="number" step="0.5" id="mileage" name="mileage" value="${mileage}">
+        <INPUT type="number" required="required" step="0.5" id="mileage" name="mileage" value="${mileage}">
         <LABEL for="year">год выпуска:</LABEL>
-        <INPUT type="number" id="year" name="year" value="${year}">
+        <INPUT type="number" required="required" min="1900"  max="2022" id="year" name="year" value="${year}">
         <BUTTON type="submit">Сохранить</BUTTON>
         <BUTTON type="reset">Сбросить</BUTTON>
     </FORM>

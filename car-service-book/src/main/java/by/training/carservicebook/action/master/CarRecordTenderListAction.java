@@ -40,7 +40,6 @@ public class CarRecordTenderListAction extends MasterAction {
 			log.debug(String.format("carList: %s", carList));
 
 			CarRecordService carRecordService = factory.getService(CarRecordService.class);
-			List<CarRecord> carRecordList = new ArrayList<>();
 			for (Car car : carList) {
 				car.setCarRecords(carRecordService.findByCarIdAndTender(car.getId(), true));
 			}

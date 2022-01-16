@@ -35,4 +35,8 @@
         <filter-name>SecurityFilter</filter-name>
         <url-pattern>*.html</url-pattern>
     </filter-mapping>
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>by.training.carservicebook.resources.ApplicationResource</param-value>
+    </context-param>
 </web-app>

@@ -19,8 +19,7 @@ public interface Dao <T extends Entity> {
             if (statement != null) {
                 statement.close();
             }
-        } catch (SQLException e) {
-            // log
+        } catch (SQLException ignored) {
         }
     }
 }

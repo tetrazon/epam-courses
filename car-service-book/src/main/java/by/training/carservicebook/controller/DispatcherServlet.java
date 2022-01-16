@@ -24,8 +24,6 @@ import java.util.Properties;
 @Log4j2
 public class DispatcherServlet extends HttpServlet {
 
-	public static final String LOG_FILE_NAME = "log.txt";
-	//public static final Level LOG_LEVEL = Level.ALL;
 	public static final int DB_POOL_START_SIZE = 10;
 	public static final int DB_POOL_MAX_SIZE = 1000;
 	public static final int DB_POOL_CHECK_CONNECTION_TIMEOUT = 0;
