@@ -15,7 +15,7 @@
 	<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<TITLE><fmt:message key="tag.title" /> - ${title}</TITLE>
 	<c:if test="${not empty message}">
-		<p>${message}</p>
+		<p><fmt:message key="${message}" /></p>
 	</c:if>
 </HEAD>
 <BODY>

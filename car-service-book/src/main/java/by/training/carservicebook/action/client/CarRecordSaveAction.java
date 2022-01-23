@@ -29,10 +29,10 @@ public class CarRecordSaveAction extends ClientAction {
 			log.debug(String.format("user %s saved carRecord with id: %s", user.getLogin() ,carRecordId));
 			forward.getAttributes().put("carRecordId", carRecordId);
 			forward.getAttributes().put("carId", Integer.parseInt(request.getParameter("carId")));
-			forward.getAttributes().put("message", "Данные ТО успешно сохранены");
+			forward.getAttributes().put("message", "message.saveCarRecord");
 
 		} catch (IncorrectFormDataException e) {
-			forward.getAttributes().put("message", "Были обнаружены некорректные данные");
+			forward.getAttributes().put("message", "message.incorrectData");
 			log.warn(String.format("Incorrect data was found when user \"%s\" tried to save carRecord", user.getLogin()), e);
 		}
 		return forward;

@@ -30,10 +30,10 @@ public class CarSaveAction extends ClientAction {
 			final Integer carId = service.save(car);
 			log.debug(String.format("user %s saved car with id: %s", user.getLogin() ,carId));
 			forward.getAttributes().put("carId", carId);
-			forward.getAttributes().put("message", "Данные авто успешно сохранены");
+			forward.getAttributes().put("message", "message.carSaved");
 
 		} catch (IncorrectFormDataException e) {
-			forward.getAttributes().put("message", "Были обнаружены некорректные данные");
+			forward.getAttributes().put("message", "message.incorrectData");
 			log.warn(String.format("Incorrect data was found when user \"%s\" tried to save car", user.getLogin()), e);
 		}
 		return forward;

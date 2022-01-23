@@ -39,7 +39,7 @@ public class OfferAcceptAction extends ClientAction {
 			offer.setIsSelected(true);
 			offerService.save(offer);
 
-			request.getSession().setAttribute("message", "предложение выбрано, ждите обратной связи от мастера");
+			request.getSession().setAttribute("message", "message.offerApproved");
 		}
 		return forward;
 	}

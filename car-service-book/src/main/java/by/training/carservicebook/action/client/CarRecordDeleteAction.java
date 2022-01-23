@@ -20,7 +20,7 @@ public class CarRecordDeleteAction extends ClientAction {
 			CarRecord carRecord = service.findById(carRecordId);
 			if(carRecord != null) {
 				service.delete(carRecord);
-				forward.getAttributes().put("message", "Запись ТО удалена");
+				forward.getAttributes().put("message", "message.carRecordDeleted");
 				log.info(String.format("User \"%s\" deleted carRecord with id %d", getAuthorizedUser().getLogin(), carRecordId));
 			}
 		} catch(NumberFormatException e) {

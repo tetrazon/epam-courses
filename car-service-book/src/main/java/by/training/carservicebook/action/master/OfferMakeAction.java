@@ -31,10 +31,10 @@ public class OfferMakeAction extends MasterAction {
 				Offer offer = validator.validate(request);
 				offer.setMaster(user);
 				offerService.save(offer);
-				forward.getAttributes().put("message", "Предложение зафиксировано");
+				forward.getAttributes().put("message", "message.offerAccepted");
 			}
 		} catch (IncorrectFormDataException e) {
-			forward.getAttributes().put("message", "Предложение не зафиксировано, некорректные данные");
+			forward.getAttributes().put("message", "message.offerNotAccepted");
 			log.warn(String.format("Incorrect data was found when user \"%s\" tried to make offer", user.getLogin()), e);
 		}
 		return forward;

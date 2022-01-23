@@ -22,7 +22,7 @@ public class CarDeleteAction extends ClientAction {
 			Car car = service.getCarById(carId);
 			if(car != null) {
 				service.deleteCar(car);
-				forward.getAttributes().put("message", "Авто успешно удалено");
+				forward.getAttributes().put("message", "message.carDeleted");
 				log.info(String.format("User \"%s\" deleted car with id %d", getAuthorizedUser().getLogin(), carId));
 			}
 		} catch(NumberFormatException e) {

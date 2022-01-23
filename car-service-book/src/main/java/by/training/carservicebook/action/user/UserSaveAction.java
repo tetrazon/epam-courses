@@ -24,11 +24,11 @@ public class UserSaveAction extends Action {
             log.debug(String.format("user: %s", user));
             UserService service = factory.getService(UserService.class);
             if (service.existByLogin(user.getLogin()) && user.getId() == null){
-                forward.getAttributes().put("message", "Пользователь с таким логином уже существует");
+                forward.getAttributes().put("message", "message.loginExist");
             } else {
                 service.save(user);
                 log.debug(String.format("user %s is registered ", user.getLogin()));
-                forward.getAttributes().put("message", String.format("пользователь с логином %s зарегистрирован", user.getLogin()));
+                forward.getAttributes().put("message", "message.userRegistered");
                 if (user.getId() != null){
                     forward = new Forward("/logout.html");
                 } else {
@@ -36,7 +36,7 @@ public class UserSaveAction extends Action {
                 }
             }
         } catch (IncorrectFormDataException e) {
-            forward.getAttributes().put("message", "Были обнаружены некорректные данные");
+            forward.getAttributes().put("message", "message.incorrectData");
             log.warn("Incorrect data was found while registering new user", e);
         }
         return forward;

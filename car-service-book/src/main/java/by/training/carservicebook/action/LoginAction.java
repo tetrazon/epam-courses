@@ -22,14 +22,14 @@ public class LoginAction extends Action {
 
 	static {
 		menu.put(Role.CLIENT, new ArrayList<>(Arrays.asList(
-				new MenuItem("/car/list.html", "мои авто")
+				new MenuItem("/car/list.html", "menu.auto")
 		)));
 		menu.put(Role.ADMIN, new ArrayList<>(Arrays.asList(
-				new MenuItem("/user/list.html", "администрирование")
+				new MenuItem("/user/list.html", "menu.admin")
 		)));
 		menu.put(Role.MASTER, new ArrayList<>(Arrays.asList(
-				new MenuItem("/car_record/tender_list.html", "тендер"),
-				new MenuItem("/car_record/approved.html", "одобреные работы")
+				new MenuItem("/car_record/tender_list.html", "menu.tender"),
+				new MenuItem("/car_record/approved.html", "menu.approved")
 		)));
 	}
 
@@ -48,7 +48,7 @@ public class LoginAction extends Action {
 			User user = service.findByLoginAndPassword(login, password);
 			if (user != null) {
 				if (user.getIsBanned()) {
-					request.setAttribute("message", "Пользователь заблокирован. Пожалуйста, обратитесь к администратору");
+					request.setAttribute("message", "error.banned");
 					log.info(String.format("banned user \"%s\" tried to log in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
 					return null;
 				}
@@ -59,19 +59,8 @@ public class LoginAction extends Action {
 				log.info(String.format("user \"%s\" is logged in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
 				return new Forward("/index.html");
 			} else {
-				String lang = (String) session.getAttribute("language");
-				if (lang == null) {
-					lang = request.getParameter("language");
-					if (lang == null) {
-						lang = "en_US";
-					}
-				}
-				ResourceBundle rb = ResourceBundleCreator.createResourceBundle(lang, "props.messages");
-				request.setAttribute("message", rb.getString("error.wrongCreds"));
-				//Forward forward = new Forward("/login.html");
-				//forward.getAttributes().put("message", rb.getString("error.wrongCreds"));
+				request.setAttribute("message", "error.wrongCreds");
 				log.info(String.format("user \"%s\" unsuccessfully tried to log in from %s (%s:%s)", login, request.getRemoteAddr(), request.getRemoteHost(), request.getRemotePort()));
-				//return forward;
 			}
 		}
 		return null;

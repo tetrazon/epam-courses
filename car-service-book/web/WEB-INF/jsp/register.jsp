@@ -2,7 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isELIgnored="false"%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="u"%>
-<u:html message="${message}" title="Регистрация">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : 'en_US'}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="props.page-content" />
+<fmt:message key="login.registration" var="registration" />
+<u:html message="${message}" title="${registration}">
     <c:if test="${not empty authorizedUser}">
         <c:set var="login" value="${authorizedUser.login}"/>
         <c:set var="id" value="${authorizedUser.id}"/>
@@ -12,46 +17,44 @@
         <c:set var="name" value="${authorizedUser.name}"/>
         <c:set var="surname" value="${authorizedUser.surname}"/>
 
-        <c:set var="title" value="изменение профиля"/>
-        <c:set var="submit" value="Сохранить изменения и войти в систему"/>
+        <fmt:message key="user.profileChange" var="title" />
+        <fmt:message key="user.saveChanges" var="submit" />
 
     </c:if>
     <c:if test="${empty authorizedUser}">
-        <c:set var="submit" value="Зарегистрироваться и войти в систему"/>
-
+        <fmt:message key="user.register" var="submit" />
     </c:if>
     <h3>${title}</h3>
     <c:url value="/user/save.html" var="userSaveUrl"/>
     <form method="post" action="${userSaveUrl}">
 
-
-        <LABEL for="password">пароль</LABEL>
+        <LABEL for="password"><fmt:message key="login.password" /> </LABEL>
         <INPUT required type="password" id="password" name="password">
-        <LABEL for="name">имя</LABEL>
+        <LABEL for="name"><fmt:message key="user.name" /></LABEL>
         <INPUT required type="text" id="name" name="name" value="${name}">
-        <LABEL for="surname">фамилия</LABEL>
+        <LABEL for="surname"><fmt:message key="user.surname" /></LABEL>
         <INPUT required type="text" id="surname" name="surname" value="${surname}">
         <c:if test="${empty authorizedUser}">
-        <LABEL for="login">логин</LABEL>
+        <LABEL for="login"><fmt:message key="login.login" /></LABEL>
         <INPUT required type="text" id="login" name="login">
-        <label>Роль</label><br>
+        <label><fmt:message key="user.role" /></label><br>
         <input type="radio" id="user" name="role" value=1>
-        <label for="user">пользователь</label><br>
+        <label for="user"><fmt:message key="user.user" /></label><br>
         <input type="radio" id="master" name="role" value=2>
-        <label for="master">мастер</label><br>
+        <label for="master"><fmt:message key="user.master" /></label><br>
         </c:if>
-        <LABEL for="email">почта</LABEL>
+        <LABEL for="email"><fmt:message key="user.email" /></LABEL>
         <INPUT required type="email" id="email" name="email" value="${email}">
-        <label for="district">область:</label>
+        <label for="district"><fmt:message key="user.district" /></label>
         <select name="district" id="district" value="${district}">
-            <option value="Брест">Брест</option>
-            <option value="Витебск">Витебск</option>
-            <option value="Гомель">Гомель</option>
-            <option value="Гродно">Гродно</option>
-            <option value="Минск">Минск</option>
-            <option value="Могилев">Могилев</option>
+            <option value="Брест"><fmt:message key="district.brest" /></option>
+            <option value="Витебск"><fmt:message key="district.vitebsk" /></option>
+            <option value="Гомель"><fmt:message key="district.Gomel" /></option>
+            <option value="Гродно"><fmt:message key="district.grodno" /></option>
+            <option value="Минск"><fmt:message key="district.minsk" /></option>
+            <option value="Могилев"><fmt:message key="district.mogilev" /></option>
         </select>
-        <LABEL for="mobilePhone">мобильный</LABEL>
+        <LABEL for="mobilePhone"><fmt:message key="user.phone" /></LABEL>
         <INPUT type="text" size="13" required id="mobilePhone" name="mobilePhone" value="${mobilePhone}">
         <c:if test="${not empty authorizedUser}">
         <input type="hidden" name="id" value="${id}">

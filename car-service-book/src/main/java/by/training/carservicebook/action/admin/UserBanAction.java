@@ -22,7 +22,13 @@ public class UserBanAction extends AdminAction {
 			UserService service = factory.getService(UserService.class);
 			service.banUser(userId, isBanned);
 			log.debug(String.format("user with id %s banned: %s",userId, isBanned));
-			forward.getAttributes().put("message", String.format("пользователь с id %s забанен: %s",userId, isBanned ? "да" : "нет"));
+			if (isBanned){
+				forward.getAttributes().put("message", "message.UserBanned");
+
+			} else {
+				forward.getAttributes().put("message", "message.UserUnbanned");
+			}
+			//forward.getAttributes().put("message", String.format("пользователь с id %s забанен: %s",userId, isBanned ? "да" : "нет"));
 		} catch (NumberFormatException e) {
 			log.error("cannot parse userId", e);
 		}

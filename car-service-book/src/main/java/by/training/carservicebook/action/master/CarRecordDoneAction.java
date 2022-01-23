@@ -35,7 +35,7 @@ public class CarRecordDoneAction extends MasterAction {
 				OfferService offerService = factory.getService(OfferService.class);
 				offerService.deleteByCarRecordId(carRecordId);
 
-				forward.getAttributes().put("message", "Выполненная работа перемещена в архив");
+				forward.getAttributes().put("message", "message.archive");
 			}
 		return forward;
 	}
