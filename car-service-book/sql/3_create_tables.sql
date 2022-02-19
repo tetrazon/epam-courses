@@ -128,7 +128,7 @@ CREATE TABLE `service_tender` (
                                       fk_service_tender_car_record FOREIGN KEY (`car_record_id`)
                                       REFERENCES `car_record` (`id`)
                                       ON UPDATE CASCADE
-                                      ON DELETE RESTRICT,
+                                      ON DELETE CASCADE ,
 
                                   CONSTRAINT fk_service_tender_master FOREIGN KEY (`master_id`)
                                       REFERENCES `user` (`id`)

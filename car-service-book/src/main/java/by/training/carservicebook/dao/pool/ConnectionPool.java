@@ -25,7 +25,7 @@ final public class ConnectionPool {
 
 	private ConnectionPool() {}
 
-	public synchronized Connection getConnection() throws DaoException {
+	public Connection getConnection() throws DaoException {
 		PooledConnection connection = null;
 		while(connection == null) {
 			try {
@@ -53,7 +53,7 @@ final public class ConnectionPool {
 		return connection;
 	}
 
-	synchronized void freeConnection(PooledConnection connection) {
+	 void freeConnection(PooledConnection connection) {
 		try {
 			if(connection.isValid(checkConnectionTimeout)) {
 				connection.clearWarnings();
@@ -98,7 +98,7 @@ final public class ConnectionPool {
 		return new PooledConnection(DriverManager.getConnection(url, user, password));
 	}
 
-	public synchronized void destroy() {
+	public void destroy() {
 		usedConnections.addAll(freeConnections);
 		freeConnections.clear();
 		for(PooledConnection connection : usedConnections) {

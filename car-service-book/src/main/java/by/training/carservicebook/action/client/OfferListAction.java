@@ -36,7 +36,7 @@ public class OfferListAction extends ClientAction {
 			List<CarRecord> carRecordList = carRecordService.findCarRecordByCarId(carId);
 			carRecordList = carRecordList
 					.parallelStream()
-							.filter(carRecord -> !carRecord.getIsTender())
+							.filter(carRecord -> carRecord.getIsTender())
 							.collect(Collectors.toList());
 			log.debug(String.format("carRecordList: %s", carRecordList));
 
